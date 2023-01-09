@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Eleve\DashboardController as EleveDashboardController;
+use App\Http\Controllers\Prof\DashboardController as ProfDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:eleve']], function () {
     Route::get('/eleve_dashboard', [EleveDashboardController::class, 'index']);
+});
+
+Route::group(['middleware' => ['auth', 'role:prof']], function () {
+    Route::get('/prof_dashboard', [ProfDashboardController::class, 'index']);
 });
