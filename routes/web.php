@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Eleve\DashboardController as EleveDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +25,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/admin_dashboard', [AdminDashboardController::class, 'index']);
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'role:eleve']], function () {
+    Route::get('/eleve_dashboard', [EleveDashboardController::class, 'index']);
+});
