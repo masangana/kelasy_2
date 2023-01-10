@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ecole;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller {
@@ -10,6 +11,10 @@ class DashboardController extends Controller {
       $this->middleware('auth');
     }
     public function index() {
-      return view('admin.dashboard');
+      $ecole = Ecole::firstOrFail();
+
+      return view('admin.dashboard', [
+        'ecole' => $ecole,
+      ]);
     }
 }

@@ -15,16 +15,21 @@
           <i class="bi bi-menu-button-wide"></i><span>Ecole</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{ route('ecole.index') }}">
-              <i class="bi bi-circle"></i><span>Ecole</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Accordion</span>
-            </a>
-          </li>
+            @if ($ecole)
+                <li>
+                    <a href="{{ route('ecole.show', ['ecole'=>1]) }}">
+                    <i class="bi bi-circle"></i><span>Ecole</span>
+                    </a>
+                </li>
+            @else
+                <li>
+                    <a href="{{ route('ecole.index') }}">
+                    <i class="bi bi-circle"></i><span>Ecole</span>
+                    </a>
+                </li>
+            @endif
+          
+          
           <li>
             <a href="components-badges.html">
               <i class="bi bi-circle"></i><span>Badges</span>

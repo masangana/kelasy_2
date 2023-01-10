@@ -45,14 +45,47 @@ class EcoleController extends Controller
       return redirect()->route('ecole.index');
     }
     public function show($id) {
-      $ecole = Ecole::where('id', $id)->findOrfail()->get();
-      return $ecole;
-      return view('admin.ecole.show');
+      $ecole = Ecole::firstOrFail();
+      //return $ecole;
+      return view('admin.ecole.show', [
+        'ecole' => $ecole,
+      ]);
     }
     public function edit($id) {
       return view('admin.ecole.edit');
     }
     public function update(Request $request, $id) {
+      $ecole = Ecole::find($id);
+
+      $request->validate([
+        'nom' => 'required',
+        'adresse' => 'required',
+        'phone' => 'required',
+      ]);
+
+      $ecole->nom = $request->nom;
+      $ecole->slug = $request->slug;
+      $ecole->adresse = $request->adresse;
+      $ecole->telephone = $request->phone;
+      $ecole->logo = $request->logo;
+      $ecole->email = $request->email;
+      $ecole->description = $request->description;
+
+      if ( $request->logo == null) {
+        $ecole->logo = $request->logo;
+      } else {
+        $file = $request->logo;
+        if ($request->hasFile('logo')) {
+          $imageName = time().rand(0, 99).'.'.$file->extension();
+          $file->move(public_path('images/logo'), $imageName);
+          $ecole->logo = $imageName;
+        }
+      }
+
+      return $ecole;
+      
+
+      //return $request->all();
       return view('admin.ecole.update');
     }
     public function destroy($id) {
