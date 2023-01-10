@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('ecoles', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('slug')->nullable();
+            $table->text('description')->nullable();
+            $table->string('adresse');
+            $table->string('telephone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
