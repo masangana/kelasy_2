@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ecole;
 use Illuminate\Http\Request;
 
 class EcoleController extends Controller
@@ -17,9 +18,35 @@ class EcoleController extends Controller
       return view('admin.ecole.create');
     }
     public function store(Request $request) {
-      return view('admin.ecole.store');
+      
+
+      $request->validate([
+        'nom' => 'required',
+        'adresse' => 'required',
+        'phone' => 'required',
+      ]);
+
+      //return $request->all();
+
+      $ecole = new Ecole();
+      $ecole->nom = $request->nom;
+      $ecole->slug = $request->slug;
+      $ecole->adresse = $request->adresse;
+      $ecole->telephone = $request->phone;
+      $ecole->email = $request->email;
+      $ecole->description = $request->description;
+      $file = $request->logo;
+      if ($request->hasFile('logo')) {
+            $imageName = time().rand(0, 99).'.'.$file->extension();
+            $file->move(public_path('images/logo'), $imageName);
+            $ecole->logo = $imageName;
+      }
+      $ecole->save();
+      return redirect()->route('ecole.index');
     }
     public function show($id) {
+      $ecole = Ecole::where('id', $id)->findOrfail()->get();
+      return $ecole;
       return view('admin.ecole.show');
     }
     public function edit($id) {
