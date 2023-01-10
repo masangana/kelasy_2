@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\EcoleController;
 use App\Http\Controllers\Eleve\DashboardController as EleveDashboardController;
 use App\Http\Controllers\Prof\DashboardController as ProfDashboardController;
 
@@ -28,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin_dashboard', [AdminDashboardController::class, 'index']);
+    Route::resource('admin/ecole', EcoleController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:eleve']], function () {
