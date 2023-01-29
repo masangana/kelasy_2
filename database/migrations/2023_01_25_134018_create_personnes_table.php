@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('lieu_naissance');
             $table->string('sexe');
             $table->string('photo')->nullable();
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('ecole_id')->constrained('ecoles');
             $table->timestamps();
         });
