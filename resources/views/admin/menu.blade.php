@@ -53,13 +53,13 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href=" {{route('personnel.create')}} ">
               <i class="bi bi-circle"></i><span>Ajouter</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Form Layouts</span>
+            <a href=" {{route('personnel.index')}} ">
+              <i class="bi bi-circle"></i><span>Voir</span>
             </a>
           </li>
           <li>

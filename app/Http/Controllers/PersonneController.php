@@ -32,6 +32,7 @@ class PersonneController extends Controller
 
         $personne = new Personne([
             'nom' => $request->get('nom'),
+            'postnom' => $request->get('postnom'),
             'prenom' => $request->get('prenom'),
             'email' => $request->get('email'),
             'telephone' => $request->get('telephone'),
