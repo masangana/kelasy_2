@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth', 'role:prof']], function () {
     Route::get('/prof_dashboard', [ProfDashboardController::class, 'index']);
 });
 
-Route::group(['middleware' => ['auth', 'role:admin|eleve|prof']], function () {
+Route::group(['middleware' => ['auth']], function () {
     //Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('personne', PersonneController::class);
 });

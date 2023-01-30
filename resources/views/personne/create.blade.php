@@ -1,9 +1,24 @@
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">General Form Elements</h5>
+      @if ($errors->any())
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
 
+      @if (session()->has('success'))
+          <div class="alert alert-success">
+            {{ session()->get('success') }}
+          </div>
+      @endif
       <!-- Vertical Form -->
       <form class="row g-3" method="POST" action=" {{route("personne.store")}} " enctype="multipart/form-data">
+        @csrf
         <div class="col-6">
           <label for="inputNanme4" class="form-label">Nom</label>
           <input type="text"
@@ -39,7 +54,10 @@
         <hr>
         <div class="col-6">
           <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" id="inputEmail4">
+          <input type="email"
+                 class="form-control" 
+                 id="inputEmail4"
+                 name="email">
         </div>
         <div class="col-6">
           <label for="inputNanme4" class="form-label">Téléphone</label>
@@ -62,14 +80,14 @@
           <input type="text"
                  class="form-control" 
                  id="inputNanme4"
-                 name="date_naissance">
+                 name="lieu_naissance">
         </div>
         <div class="col-6">
           <label for="inputNanme4" class="form-label">Date de naissance</label>
           <input type="date"
                  class="form-control" 
                  id="inputNanme4"
-                 name="lieu_naissance">
+                 name="date_naissance">
         </div>
         <div class="col-6">
           <label class="form-label">Genre</label>
@@ -87,7 +105,8 @@
                  type="file" 
                  id="formFile"
                  name="photo"
-                 accept="image/*">
+                 accept="image/*"
+                 required>
         </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Submit</button>

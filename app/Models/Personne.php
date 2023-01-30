@@ -20,6 +20,7 @@ class Personne extends Model
         'sexe',
         'photo',
         'ecole_id',
+        'user_id',
     ];
 
     protected $dates = [
