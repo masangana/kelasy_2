@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\EcoleController;
 use App\Http\Controllers\Eleve\DashboardController as EleveDashboardController;
 use App\Http\Controllers\Prof\DashboardController as ProfDashboardController;
 use App\Http\Controllers\Admin\PersonnelController as PersonnelAdminController;
+use App\Http\Controllers\PersonneController;
 use Faker\Provider\ar_EG\Person;
 
 /*
@@ -41,4 +42,9 @@ Route::group(['middleware' => ['auth', 'role:eleve']], function () {
 
 Route::group(['middleware' => ['auth', 'role:prof']], function () {
     Route::get('/prof_dashboard', [ProfDashboardController::class, 'index']);
+});
+
+Route::group(['middleware' => ['auth', 'role:admin|eleve|prof']], function () {
+    //Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::resource('personne', PersonneController::class);
 });
