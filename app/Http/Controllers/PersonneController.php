@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ecole;
 use App\Models\Personne;
 use App\Models\Role;
 use App\Models\User;
@@ -33,6 +34,8 @@ class PersonneController extends Controller
             'photo' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
+
+        //return $request->all();
 
         DB::transaction(function() use ($request)
         {
@@ -74,5 +77,15 @@ class PersonneController extends Controller
         }
         
         return redirect("/personnel/create")->with('success','Personne enregistrée!');
+    }
+
+    public function show (Personne $personne){
+
+        $ecole = Ecole::firstOrFail();
+        $personne->load('user');
+        return view('personne.show', [
+            'personne' => $personne,
+            'ecole' => $ecole,
+        ]);
     }
 }

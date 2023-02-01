@@ -28,22 +28,6 @@
                     </a>
                 </li>
             @endif
-
-          <li>
-            <a href="components-tabs.html">
-              <i class="bi bi-circle"></i><span>Tabs</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-pagination.html">
-              <i class="bi bi-circle"></i><span>Pagination</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-progress.html">
-              <i class="bi bi-circle"></i><span>Progress</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Components Nav -->
 
@@ -60,16 +44,6 @@
           <li>
             <a href=" {{route('personnel.index')}} ">
               <i class="bi bi-circle"></i><span>Voir</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
             </a>
           </li>
         </ul>

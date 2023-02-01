@@ -33,4 +33,13 @@ class PersonnelController extends Controller
         ]);
     }
 
+    public function show ($personne){
+        $ecole = Ecole::firstOrFail();
+        $personne = Personne::where('id', '=', $personne)->with('user')->firstOrFail();
+        return view('admin.personnel.show', [
+            'ecole' => $ecole,
+            'personne' => $personne,
+        ]);
+    }
+
 }

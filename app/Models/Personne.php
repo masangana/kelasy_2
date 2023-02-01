@@ -12,6 +12,7 @@ class Personne extends Model
 
     protected $fillable = [
         'nom',
+        'postnom',
         'prenom',
         'email',
         'telephone',

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-      <h5 class="card-title">General Form Elements</h5>
+      <h5 class="card-title">Ajoute d'une personne</h5>
       @if ($errors->any())
           <div class="alert alert-danger">
               <ul>
