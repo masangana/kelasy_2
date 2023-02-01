@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -54,5 +55,10 @@ class Personne extends Model
     public function getPhotoAttribute($value)
     {
         return $value ?? 'default.png';
+    }
+
+    public function age()
+    {
+        return Carbon::parse($this->attributes['date_naissance'])->age;
     }
 }

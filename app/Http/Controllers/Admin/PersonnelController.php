@@ -4,13 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ecole;
+use App\Models\Personne;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PersonnelController extends Controller
 {
     public function index (){
-        return view('admin.personnel.index');
+        $ecole = Ecole::firstOrFail();
+        $personnels = User::where('role', '=', 'admin')->orWhere('role', '=', 'prof')->with('personne') ->get();
+        //return $personnels;
+        return view('admin.personnel.index',
+            [
+                'personnes' => $personnels,
+                'ecole' => $ecole,
+            ]);
     }
 
     public function create (){

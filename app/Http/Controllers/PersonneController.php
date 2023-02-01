@@ -22,7 +22,6 @@ class PersonneController extends Controller
     }
 
     public function store (Request $request){
-        //return $request->all();
         $request->validate([
             'nom' => 'required',
             'postnom' => 'required',
