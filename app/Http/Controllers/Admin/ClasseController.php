@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Classe;
+use App\Models\Cours;
 use App\Models\Ecole;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -55,13 +56,20 @@ class ClasseController extends Controller
 
     public function show ($classe){
         
-        $classe = Classe::with('tuteur')-> findOrFail($classe);
-        $prof = User::with('personne')->where('id', $classe->tuteur->id)->get();
-        //return $classe;
+        $classe = Classe::with('tuteur', 'cours')-> findOrFail($classe);
+        $titulaire = User::with('personne')->where('id', $classe->tuteur->id)->firstOrFail();
+        $cours = Cours::with('professeurs')->where('classe_id', $classe->id)->get();
+        $professeurs = User::with('personne')->where('role', 'prof')->get();
+        
+        //return $cours;
+        //return $titulaire;
+        //return $professeurs;
         return view('admin.classe.show',
             [
                 'classe' => $classe,
-                'prof' => $prof,
+                'titulaire' => $titulaire,
+                'cours'=> $cours,
+                'professeurs' => $professeurs,
             ]
         );
     }

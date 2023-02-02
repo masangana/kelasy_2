@@ -19,6 +19,16 @@ class Cours extends Model
     
     public function classe()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo(Classe::class, 'classe_id');
+    }
+
+    public function getNomAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function professeurs()
+    {
+        return $this->belongsToMany(User::class, 'cours_profs');
     }
 }

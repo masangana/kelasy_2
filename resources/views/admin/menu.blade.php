@@ -91,7 +91,7 @@
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
+            <a href="{{route('cours.index')}}">
               <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
             </a>
           </li>

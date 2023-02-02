@@ -85,7 +85,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Index des cours</h5>
-                <table class="table datatable">
+                <table class="table table-striped datatable">
                     <thead>
                         <tr>
                             <th>Nom</th>
@@ -98,8 +98,16 @@
                     <tbody>
                         @foreach ($cours as $cour)
                             <tr>
-                                <td>{{$cour->nom}}</td>
-                                <td>{{$cour->classe->nom}}</td>
+                                <td>
+                                    <a href="{{Route('cours.show', $cour->id)}}">
+                                        {{$cour->nom}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{Route('classes.show', $cour->classe->id)}}">
+                                        {{$cour->classe->nom}}
+                                    </a>
+                                </td>
                                 <td>{{$cour->slug}}</td>
                                 <td>{{$cour->maximum}}</td>
                                 <td>
