@@ -58,7 +58,9 @@
                                 <td>
                                     @if ($unCours->professeurs->count() > 0)
                                         <p>
-                                            enseignant
+                                            @foreach ($unCours->professeurs as $professeur)
+                                                {{$professeur->personne->nom}} {{$professeur->personne->postnom}}
+                                            @endforeach
                                         </p>
                                     @else
                                         <form method="POST" action="{{route('cours.add_prof', $unCours)}}">

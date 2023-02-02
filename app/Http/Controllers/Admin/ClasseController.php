@@ -61,7 +61,7 @@ class ClasseController extends Controller
         $cours = Cours::with('professeurs')->where('classe_id', $classe->id)->get();
         $professeurs = User::with('personne')->where('role', 'prof')->get();
         
-        //return $cours;
+        //return $cours[0];
         //return $titulaire;
         //return $professeurs;
         return view('admin.classe.show',
