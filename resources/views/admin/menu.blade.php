@@ -137,9 +137,9 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href=" {{route('annee_scolaire.index')}} ">
           <i class="bi bi-card-list"></i>
-          <span>Register</span>
+          <span>Cursus</span>
         </a>
       </li><!-- End Register Page Nav -->
 
