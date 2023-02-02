@@ -22,8 +22,17 @@
     <link href="{{asset ('user/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset ('user/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('user/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   
     <!-- Template Main CSS File -->
     <link href="{{asset ('user/assets/css/style.css')}}" rel="stylesheet">
+
+    <script>
+      $(function(){
+       $("#prof").select2();
+      }); 
+    </script>
   
   </head>

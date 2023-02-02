@@ -29,11 +29,11 @@ class Classe extends Model
 
     public function eleves()
     {
-        return $this->hasMany(Eleve::class);
+        return $this->hasMany(User::class);
     }
 
     public function tuteur()
     {
-        return $this->hasMany(Tuteur::class);
+        return $this->belongsTo(User::class, 'professeur_id');
     }    
 }

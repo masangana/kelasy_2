@@ -2,13 +2,12 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-2">
-    </div>
-    <div class="col-lg-8">
+    
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
               <h5 class="card-title">Liste des Classes</h5>
-                <table class="table table-striped">
+                <table class="table datatable">
                     <thead>
                     <tr>
                         <th scope="col">#</th>

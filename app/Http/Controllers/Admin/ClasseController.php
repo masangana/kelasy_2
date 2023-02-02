@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Classe;
 use App\Models\Ecole;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClasseController extends Controller
@@ -20,8 +21,11 @@ class ClasseController extends Controller
 
     public function create (){
         $ecole = Ecole::firstOrFail();
+        $profs = User::where('role', '=', 'prof')->get();
+        //return $profs;
         return view('admin.classe.create',[
             'ecole' => $ecole,
+            'profs' => $profs,
         ]);
     }
 
@@ -30,6 +34,7 @@ class ClasseController extends Controller
             'nom' => 'required',
             'slug' => 'required',
             'niveau' => 'required',
+            'prof' => 'required',
             'description' => 'nullable',
         ]);
 
@@ -40,6 +45,7 @@ class ClasseController extends Controller
                 'slug' => $request->get('slug'),
                 'niveau' => $request->get('niveau'),
                 'description' => $request->get('description'),
+                'professeur_id' => $request->get('prof'),
                 'ecole_id' => $ecole->id,
             ]
         );
@@ -48,11 +54,14 @@ class ClasseController extends Controller
     }
 
     public function show ($classe){
-        //$classe->load();
-        $classe = Classe::findOrFail($classe);
+        
+        $classe = Classe::with('tuteur')-> findOrFail($classe);
+        $prof = User::with('personne')->where('id', $classe->tuteur->id)->get();
+        //return $classe;
         return view('admin.classe.show',
             [
                 'classe' => $classe,
+                'prof' => $prof,
             ]
         );
     }

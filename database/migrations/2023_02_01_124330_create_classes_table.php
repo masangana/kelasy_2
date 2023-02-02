@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('slug');
             $table->string('niveau');
             $table->text('description')->nullable();
+            $table->foreignId('professeur_id')->constrained()->onDelete('cascade');
             $table->foreignId('ecole_id')->constrained()->onDelete('cascade');
-
             $table->timestamps();
         });
     }

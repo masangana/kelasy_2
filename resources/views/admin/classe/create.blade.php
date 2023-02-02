@@ -45,6 +45,23 @@
                   </div>
                 </div>
                 <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Prof</label>
+                  <div class="col-sm-10">
+                    <select class="form-select"
+                            aria-label="Default select example"
+                            name="prof"
+                            id="prof"
+                            required>
+                          @foreach ($profs as $prof)
+                            <option selected value="{{$prof->id}} ">
+                              {{$prof->name}} 
+                              
+                            </option>
+                          @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Niveau</label>
                   <div class="col-sm-10">
                     <select class="form-select"
