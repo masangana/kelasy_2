@@ -10,6 +10,7 @@ use App\Http\Controllers\Prof\DashboardController as ProfDashboardController;
 use App\Http\Controllers\Admin\PersonnelController as PersonnelAdminController;
 use App\Http\Controllers\Admin\ClasseController as ClasseAdminController;
 use App\Http\Controllers\Admin\AnneeScolaireController as AnneeScolaireAdminController;
+use App\Http\Controllers\Admin\CoursController as CoursAdminController;
 use App\Http\Controllers\PersonneController;
 
 
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('personnel', PersonnelAdminController::class);
     Route::resource('classes', ClasseAdminController::class);
     Route::resource('annee_scolaire', AnneeScolaireAdminController::class);
+    Route::resource('cours', CoursAdminController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:eleve']], function () {
