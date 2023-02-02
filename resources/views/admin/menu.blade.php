@@ -82,11 +82,6 @@
               <i class="bi bi-circle"></i><span>Voir</span>
             </a>
           </li>
-          <li>
-            <a href="charts-echarts.html">
-              <i class="bi bi-circle"></i><span>ECharts</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Charts Nav -->
 

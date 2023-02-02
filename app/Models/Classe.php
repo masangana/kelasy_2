@@ -36,4 +36,9 @@ class Classe extends Model
     {
         return $this->belongsTo(User::class, 'professeur_id');
     }    
+
+    public function cours()
+    {
+        return $this->hasMany(Cours::class);
+    }
 }

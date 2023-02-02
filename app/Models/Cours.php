@@ -9,5 +9,16 @@ class Cours extends Model
 {
     use HasFactory;
 
-    //protected $fillable
+    protected $fillable = [
+        'nom',
+        'slug',
+        'description',
+        'maximum',
+        'classe_id',
+    ];
+    
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
+    }
 }
