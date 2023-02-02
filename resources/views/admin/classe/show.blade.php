@@ -61,14 +61,18 @@
                                             enseignant
                                         </p>
                                     @else
-                                        <form action="">
+                                        <form method="POST" action="{{route('cours.add_prof', $unCours)}}">
                                             @csrf
                                             <input type="hidden" name="classe" value="{{$classe->id}}">
                                             <input type="hidden" name="cours" value="{{$unCours->id}}">
                                             <div class="row mb-3">
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Choisir un enseignant</label>
                                                 <div class="col-sm-6">
-                                                    <select name="professeur" id="prof" class="form-control">
+                                                    <select name="professeur" 
+                                                            id="prof" 
+                                                            class="form-control"
+                                                            required>
+                                                        <option value="">Choisir un enseignant</option>
                                                         @foreach ($professeurs as $professeur)
                                                             <option value="{{$professeur->id}}">
                                                                 {{$professeur->name}}

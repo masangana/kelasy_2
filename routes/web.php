@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('classes', ClasseAdminController::class);
     Route::resource('annee_scolaire', AnneeScolaireAdminController::class);
     Route::resource('cours', CoursAdminController::class);
+    Route::post('cours/{cours}/add_prof', [CoursAdminController::class, 'add_prof'])->name('cours.add_prof');
 });
 
 Route::group(['middleware' => ['auth', 'role:eleve']], function () {

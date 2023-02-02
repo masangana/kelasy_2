@@ -29,6 +29,8 @@ class Cours extends Model
 
     public function professeurs()
     {
-        return $this->belongsToMany(User::class, 'cours_profs');
+        return $this->belongsToMany(User::class, 'cours_profs')
+            ->withPivot('cours_id', 'user_id', 'annee_scolaire_id')
+            ->withTimestamps();
     }
 }
