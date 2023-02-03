@@ -48,6 +48,7 @@
                     <thead>
                         <tr>
                             <th>Intitulé</th>
+                            <th>Cote</th>
                             <th>Enseignant</th>
                         </tr>
                     </thead>
@@ -55,6 +56,7 @@
                         @foreach ($cours as $unCours)
                             <tr>
                                 <td>{{$unCours->nom}}</td>
+                                <td>{{$unCours->maximum}}</td>
                                 <td>
                                     @if ($unCours->professeurs->count() > 0)
                                         <p>
@@ -96,8 +98,6 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="col-lg-2">
     </div>
 </div>
 @endsection
