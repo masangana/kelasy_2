@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PersonnelController as PersonnelAdminController;
 use App\Http\Controllers\Admin\ClasseController as ClasseAdminController;
 use App\Http\Controllers\Admin\AnneeScolaireController as AnneeScolaireAdminController;
 use App\Http\Controllers\Admin\CoursController as CoursAdminController;
+use App\Http\Controllers\Admin\EleveController as EleveAdminController;
 use App\Http\Controllers\PersonneController;
 
 
@@ -40,6 +41,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('classes', ClasseAdminController::class);
     Route::resource('annee_scolaire', AnneeScolaireAdminController::class);
     Route::resource('cours', CoursAdminController::class);
+    Route::resource('eleves', EleveAdminController::class);
     Route::post('cours/{cours}/add_prof', [CoursAdminController::class, 'add_prof'])->name('cours.add_prof');
 });
 
