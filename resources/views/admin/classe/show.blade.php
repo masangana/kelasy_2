@@ -20,9 +20,16 @@
                 <h6>Titulaire</h6>
                 <div class="row">
                     <div class="col-lg-6">
-                        <p>
-                            {{$titulaire->personne->nom}} {{$titulaire->personne->postnom}}
-                        </p>
+                        @if ($titulaire == null)
+                            <p>
+                                Aucun titulaire pour cette classe
+                            </p>
+                        @else
+                            <p>
+                                {{$titulaire->personne->nom}} {{$titulaire->personne->postnom}}
+                            </p>  
+                        @endif
+                        
                     </div>
                     
                 </div>

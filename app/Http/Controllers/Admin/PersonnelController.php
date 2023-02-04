@@ -14,11 +14,13 @@ class PersonnelController extends Controller
     public function index (){
         $ecole = Ecole::firstOrFail();
         $personnels = User::where('role', '=', 'admin')->orWhere('role', '=', 'prof')->with('personne') ->get();
+        $view = 'personnel';
         //return $personnels;
         return view('admin.personnel.index',
             [
                 'personnes' => $personnels,
                 'ecole' => $ecole,
+                'view' => $view,
             ]);
     }
 

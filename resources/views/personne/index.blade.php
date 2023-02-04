@@ -12,7 +12,13 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Post-Nom</th>
                     <th scope="col">Prénom</th>
-                    <th scope="col">Fonction</th>
+                    @if ($view == 'eleve')
+                      <th scope="col">
+                        Classe
+                      </th>
+                    @else
+                      <th scope="col">Fonction</th>
+                    @endif
                     <th scope="col">Mail</th>
                     <th scope="col">Téléphone</th>
                     <th>Actions</th>
@@ -35,9 +41,17 @@
                                     <td>
                                         {{ $personne->personne->prenom }}
                                     </td>
-                                    <td>
-                                        {{ $personne->role }}
-                                    </td>
+                                    @if ($view == 'eleve')
+                                      <td>
+                                        {{ $personne->isPupil[0] ->nom }}
+                                      </td>
+                                      
+                                    @else
+                                      <td>
+                                          {{ $personne->role }}
+                                      </td>
+                                    @endif
+                                    
                                     <td>
                                         {{ $personne->email }}
                                     </td>
