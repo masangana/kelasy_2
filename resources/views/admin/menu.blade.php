@@ -100,11 +100,6 @@
               <i class="bi bi-circle"></i><span>Voir</span>
             </a>
           </li>
-          <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Icons Nav -->
 
