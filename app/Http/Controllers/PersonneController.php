@@ -89,10 +89,26 @@ class PersonneController extends Controller
     public function show (Personne $personne){
 
         $ecole = Ecole::firstOrFail();
-        $personne->load('user');
+        $personne->load(['user'=> function ($request){
+            $request->with('isPupil');
+        }]);
+
+        $annee_table = [];
+
+        if (sizeof($personne->user->isPupil) != 0) {
+            foreach ($personne->user->isPupil as $key => $value) {
+
+                $annee_table[] = AnneeScolaire::find($value->pivot->annee_scolaire_id);
+            }
+        }
+
+        //return $anne_table;
+
+        //return $personne;
         return view('personne.show', [
             'personne' => $personne,
             'ecole' => $ecole,
+            'annees' => $annee_table,
         ]);
     }
 }

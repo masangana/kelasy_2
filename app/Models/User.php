@@ -76,4 +76,9 @@ class User extends Authenticatable
             ->withPivot('classe_id', 'user_id', 'annee_scolaire_id')
             ->withTimestamps();
     }
+
+    public function hasCursus()
+    {
+        return $this->belongsToMany(Cursus::class, 'cursus_eleves');
+    }
 }
