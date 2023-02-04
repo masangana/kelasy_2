@@ -9,8 +9,15 @@
     @include('layouts.header')
   <!-- End Header -->
   
-  <!-- ======= Sidebar ======= -->
-    @yield('menu')
+  <!-- ======= Sidebar ======= -->    
+  @if (Auth::user()->role == 'prof')
+    @include('prof.menu')
+  @elseif (Auth::user()->role == 'eleve')
+    @include('eleve.menu')
+  @elseif (Auth::user()->role == 'admin')
+    @include('admin.menu')
+  @endif
+
   <!-- End Sidebar-->
 
   <main id="main" class="main">

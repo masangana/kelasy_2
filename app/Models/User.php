@@ -20,6 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'ecole_id',
+        'role_id',
+        'role',
         'password',
     ];
 
@@ -41,4 +44,41 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function personne()
+    {
+        return $this->hasOne(Personne::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function titulaire()
+    {
+        return $this->hasOne(Classe::class, 'professeur_id');
+    }
+
+    public function eleve()
+    {
+        return $this->belongsTo(Classe::class);
+    }
+
+    public function hasCours()
+    {
+        return $this->belongsToMany(Cours::class, 'cours_profs');
+    }
+
+    public function isPupil()
+    {
+        return $this->belongsToMany(Classe::class, 'classe_eleves', 'user_id', 'classe_id')
+            ->withPivot('classe_id', 'user_id', 'annee_scolaire_id')
+            ->withTimestamps();
+    }
+
+    public function hasCursus()
+    {
+        return $this->belongsToMany(Cursus::class, 'cursus_eleves');
+    }
 }
