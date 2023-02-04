@@ -29,7 +29,7 @@ class Classe extends Model
 
     public function eleves()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'classe_eleves');
     }
 
     public function tuteur()

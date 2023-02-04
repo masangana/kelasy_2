@@ -56,14 +56,17 @@ class ClasseController extends Controller
 
     public function show ($classe){
         
-        $classe = Classe::with('tuteur', 'cours')-> findOrFail($classe);
+        $classe = Classe::with(['tuteur', 'cours','eleves' => function($querry){
+            $querry->with('personne');
+        }])-> findOrFail($classe);
+
+        //return $classe;
         if($classe->tuteur == null){
             $titulaire = null;
         }
         else{
             $titulaire = User::with('personne')->where('id', $classe->tuteur->id)->firstOrFail();
         }
-        //$titulaire = User::with('personne')->where('id', $classe->tuteur->id)->firstOrFail();
         $cours = Cours::with('professeurs')->where('classe_id', $classe->id)->get();
         $professeurs = User::with('personne')->where('role', 'prof')->get();
         

@@ -76,6 +76,7 @@
                         <th scope="col">Nom</th>
                         <th scope="col">Date de Début</th>
                         <th scope="col">Date de Fin</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -86,6 +87,13 @@
                         <td>{{$annee->nom}}</td>
                         <td>{{$annee->date_debut->format('d-M-Y') }}</td>
                         <td>{{$annee->date_fin->format('d-M-Y')}}</td>
+                        <td>
+                            @if ($annee->active == 1)
+                                <span class="badge bg-success">Active</span>
+                            @else
+                                <span class="badge bg-danger">Inactive</span>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{Route('annee_scolaire.edit', $annee->id)}} " class="btn btn-primary">Modifier</a>
                             <form action="{{Route('annee_scolaire.destroy', $annee->id)}} " method="POST" class="d-inline">

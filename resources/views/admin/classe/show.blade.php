@@ -38,6 +38,57 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Les Etudiants</h5>
+                <hr>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <p class="card-text">Nombre d'etudiants: {{$classe->eleves->count()}} </p>
+                    </div>
+                </div>
+                <hr>
+
+                <table class="table table-striped datatable">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Post-Nom</th>
+                            <th>Prénom</th>
+                            <th>Date de naissance</th>
+                            <th>
+                                Age
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($classe->eleves as $etudiant)
+                            <tr>
+                                
+                                    <td>
+                                        <a href="{{Route('personne.show', $etudiant->personne )}}">
+                                            {{$etudiant->personne->nom}}
+                                        </a>
+                                    </td>
+                                    <td>{{$etudiant->personne->postnom}}</td>
+                                    <td>{{$etudiant->personne->prenom}}</td>
+                                    <td>
+                                        {{$etudiant->personne->date_naissance->format('d-M-Y')}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{$etudiant->personne->date_naissance->age}} Ans
+                                    </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
