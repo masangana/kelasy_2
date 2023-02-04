@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnneeScolaire;
 use App\Models\Ecole;
 use App\Models\Personne;
 use App\Models\Role;
@@ -54,7 +55,7 @@ class PersonneController extends Controller
                 'role_id' => $request->get('role'),
                 'ecole_id' => Auth::user()->ecole_id,
             ]);
-            $personne = Personne::create([
+            Personne::create([
                 'nom' => $request->get('nom'),
                 'postnom' => $request->get('postnom'),
                 'prenom' => $request->get('prenom'),
@@ -68,15 +69,21 @@ class PersonneController extends Controller
                 'user_id' => $user->id,
                 'ecole_id' => Auth::user()->ecole_id,
             ]);
+            $annee = AnneeScolaire::where('active', true)->firstOrFail();
+            if ($user_role->nom == 'eleve') {
+                $user
+                    ->isPupil()
+                    ->attach($request->get('classe'), ['annee_scolaire_id' => $annee->id]);
+            }
         });
 
         if (Role::findOrfail($request->get('role')) == 'eleve') {
-            $roles = Role::findOrfail($request->get('role'));
+            return redirect("/eleves/create")->with('success','Personne enregistrée!');
         } else {
-           $roles = Role::where('nom','=' ,'prof')->orWhere('nom','=', 'admin')->get();
+           return redirect("/personnel/create")->with('success','Personne enregistrée!');
         }
         
-        return redirect("/personnel/create")->with('success','Personne enregistrée!');
+       
     }
 
     public function show (Personne $personne){

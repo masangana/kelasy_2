@@ -66,7 +66,7 @@
                  id="inputNanme4"
                  name="telephone">
         </div>
-        <div class="col-12">
+        <div class="col-6">
           <label for="inputAddress" class="form-label">Adresse</label>
           <input type="text"
                  class="form-control" 
@@ -74,6 +74,21 @@
                  placeholder="1234 Main St"
                  name="adresse">
         </div>
+        @if ($roles[0]->nom == 'eleve')
+          <div class="col-6">
+            <label class="form-label">Classe</label>
+            <select class="form-select"
+                    aria-label="Default select example"
+                    name="classe"
+                    id="prof">
+              <option selected>Select</option>
+              @foreach ($classes as $classe )
+                <option value="{{$classe->id}}">{{$classe->nom}}</option>
+              @endforeach
+            </select>
+          </div>
+        @endif
+          
         <hr>
         <div class="col-6">
           <label for="inputNanme4" class="form-label">Lieu de Naissance</label>
