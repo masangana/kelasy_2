@@ -44,7 +44,7 @@ class CoteController extends Controller
                     'Epreuve'. $request->get('epreuve'). ' Max '.$request->get('max'). ' Periode '.$request->get('periode').
                     ' Commentaire '.$request->get('commentaire'). ' Cours '.$request->get('cours_id'). ' Annee Scolaire '.$annee_scolaire->id ;
                 
-                /*
+                
                 Cote::create([
                     'eleve_id' => $eleve->id,
                     'cours_id' => $request->get('cours_id'),
@@ -54,7 +54,7 @@ class CoteController extends Controller
                     'cote' => $request->get($eleve->id),
                     'annee_scolaire_id' => $annee_scolaire->id,
                     'commentaire' => $request->get('commentaire'),
-                ]);*/
+                ]);
             }
         }
         //return $classes;
