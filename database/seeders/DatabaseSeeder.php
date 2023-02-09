@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
         
-        Role::factory(1)->create(
+       /* Role::factory(1)->create(
             [
                 'nom' => 'admin',
                 'description' => 'Administrateur',
@@ -42,5 +42,9 @@ class DatabaseSeeder extends Seeder
                 'description' => 'enseignant',
             ]
         );
+
+        \App\Models\User::factory(10)->create();
+        */
+        \App\Models\Personne::factory(10)->create();
     }
 }

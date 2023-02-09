@@ -14,6 +14,7 @@ class Classe extends Model
         'slug',
         'niveau',
         'description',
+        'professeur_id',
         'ecole_id',
     ];
 

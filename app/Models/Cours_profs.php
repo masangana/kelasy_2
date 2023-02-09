@@ -13,6 +13,7 @@ class Cours_profs extends Model
         'cours_id',
         'user_id',
         'annee_scolaire_id',
+        'is_active',
     ];
 
     public function cours()
@@ -22,7 +23,7 @@ class Cours_profs extends Model
 
     public function professeur()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function cursus()

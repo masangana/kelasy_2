@@ -38,16 +38,17 @@ class ClasseController extends Controller
             'prof' => 'required',
             'description' => 'nullable',
         ]);
+        //return $request->all();
 
         $ecole = Ecole::firstOrFail();
-        $classe = Classe::create(
+        Classe::create(
             [
                 'nom' => $request->get('nom'),
                 'slug' => $request->get('slug'),
                 'niveau' => $request->get('niveau'),
                 'description' => $request->get('description'),
-                'professeur_id' => $request->get('prof'),
                 'ecole_id' => $ecole->id,
+                'professeur_id' => $request->get('prof'),
             ]
         );
 
@@ -60,7 +61,6 @@ class ClasseController extends Controller
             $querry->with('personne');
         }])-> findOrFail($classe);
 
-        //return $classe;
         if($classe->tuteur == null){
             $titulaire = null;
         }

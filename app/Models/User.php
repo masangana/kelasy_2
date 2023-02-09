@@ -67,7 +67,9 @@ class User extends Authenticatable
 
     public function hasCours()
     {
-        return $this->belongsToMany(Cours::class, 'cours_profs');
+        return $this->belongsToMany(Cours::class, 'cours_profs')
+            ->withPivot('cours_id', 'user_id', 'annee_scolaire_id', 'is_active')
+            ->withTimestamps();
     }
 
     public function isPupil()

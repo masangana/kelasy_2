@@ -68,7 +68,6 @@
                                                     disabled><i class="bx bx-edit-alt me-1" ></i> Voir</a
                                                 >
                                                 
-            
                                                 <form id="delete-form-{{ $personne->id }}" action="{{ route('personne.destroy', ['personne' => $personne->id]) }}" method="POST" class="d-none">
                                                     @csrf
                                                     @method('DELETE')

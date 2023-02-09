@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\ClasseController as ClasseAdminController;
 use App\Http\Controllers\Admin\AnneeScolaireController as AnneeScolaireAdminController;
 use App\Http\Controllers\Admin\CoursController as CoursAdminController;
 use App\Http\Controllers\Admin\EleveController as EleveAdminController;
+use App\Http\Controllers\Prof\ClasseController as ClasseProfController;
+use App\Http\Controllers\Prof\CoursController as CoursProfController;
+use App\Http\Controllers\Prof\CoteController as CoteProfController;
 use App\Http\Controllers\PersonneController;
 
 
@@ -51,6 +54,9 @@ Route::group(['middleware' => ['auth', 'role:eleve']], function () {
 
 Route::group(['middleware' => ['auth', 'role:prof']], function () {
     Route::get('/prof_dashboard', [ProfDashboardController::class, 'index']);
+    Route::resource('classe_prof', ClasseProfController::class);
+    Route::resource('cours_prof', CoursProfController::class);
+    Route::resource('cote_prof', CoteProfController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {
