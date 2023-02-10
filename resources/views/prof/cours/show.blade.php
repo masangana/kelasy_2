@@ -37,8 +37,12 @@
                       <th rowspan="2" scope="col">#</th>
                       <th rowspan="2" scope="col">Name</th>
                       <th colspan="3" scope="col" class="text-center">Période 1</th>
+                      <th colspan="3" scope="col" class="text-center">Période 2</th>
                     </tr>
                     <tr>
+                      <th scope="col">TP</th>
+                      <th scope="col">Extn.</th>
+                      <th scope="col">E-mail</th>
                       <th scope="col">TP</th>
                       <th scope="col">Extn.</th>
                       <th scope="col">E-mail</th>
@@ -87,30 +91,35 @@
               </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-          <table class="table datatable">
+        <div class="overflow-scroll tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+          <table class="table datatable ">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Nom </th>
-                <th>Genre</th>
-                <th>
-                  Periode 
-                </th>
+                <th rowspan="2" >#</th>
+                <th rowspan="2" >Nom </th>
+                <th rowspan="2" >Genre</th>
+                @foreach ($periodeTable as $index => $periode)
+                  @foreach ($periodes as $periode2)
+                    @if ($periode == $periode2->id)
+                      @php
+                        $span = ${"compte" . $periode2->id};
+                      @endphp
+                      <th colspan="{{$span}}" class="text-center">{{$periode2->nom}}</th>
+                      
+                    @endif
+                  @endforeach
+                @endforeach
                 
               </tr>
-
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>
-                  Interro
-                </th>
-                <th>
-                  Examen
-                </th>
-              </tr>
+                @foreach ($periodeTable as $periode)
+                  @foreach ($groupe_cote as $epreuve)
+                    @if ($periode == $epreuve->periode_id)
+                      <th>TP</th>
+                    @endif
+                  @endforeach
+                @endforeach
+              <tr>
             </thead>
             <tbody>
               @foreach ($cours->classe->eleves as $index => $eleve)

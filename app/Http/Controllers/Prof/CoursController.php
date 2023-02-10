@@ -42,10 +42,46 @@ class CoursController extends Controller
 
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $annee_scolaire->id)->get();
 
-        //return $groupe_cote;
-
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
+
+        foreach ($groupe_cote as $index =>  $value) {
+            foreach($epreuves as $epreuve){
+                if($value->epreuve_id == $epreuve->id){
+                    $periodeTable[$index] = $value->periode_id;
+
+                }
+            }
+        }
+
+        $periodeTable = array_unique($periodeTable);   
+        
+        /*Compte manuel des activités dans une periode*/
+
+        $compte1 = GroupeCote::where('periode_id', 1)
+            ->where('cours_id', $id)
+            ->where('annee_scolaire_id', $annee_scolaire->id)->count();
+
+        $compte2 = GroupeCote::where('periode_id', 2)
+            ->where('cours_id', $id)
+            ->where('annee_scolaire_id', $annee_scolaire->id)->count();
+
+        $compte3 = GroupeCote::where('periode_id', 3)
+            ->where('cours_id', $id)
+            ->where('annee_scolaire_id', $annee_scolaire->id)->count();
+
+        $compte4 = GroupeCote::where('periode_id', 4)
+            ->where('cours_id', $id)
+            ->where('annee_scolaire_id', $annee_scolaire->id)->count();
+
+        $compte5 = GroupeCote::where('periode_id', 5)
+            ->where('cours_id', $id)
+            ->where('annee_scolaire_id', $annee_scolaire->id)->count();
+
+        $compte6 = GroupeCote::where('periode_id', 6)
+            ->where('cours_id', $id)
+            ->where('annee_scolaire_id', $annee_scolaire->id)->count();
+        
 
         return view('prof.cours.show', [
             'classes' => $classes,
@@ -55,6 +91,13 @@ class CoursController extends Controller
             'periodes' => $periodes,
             'annee_scolaire' => $annee_scolaire,
             'groupe_cote' => $groupe_cote,
+            'periodeTable' => $periodeTable,
+            'compte1' => $compte1,
+            'compte2' => $compte2,
+            'compte3' => $compte3,
+            'compte4' => $compte4,
+            'compte5' => $compte5,
+            'compte6' => $compte6,
         ]);
     }
 }
