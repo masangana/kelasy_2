@@ -30,20 +30,25 @@
           <table class="table datatable">
             <thead>
               <tr>
-                <th>Num</th>
-                <th>Nom</th>
-                <th>Postnom</th>
-                <th>Prenom</th>
-                <th>Sexe</th>
+                <th>#</th>
+                <th>Nom </th>
+                <th>Genre</th>
+                @foreach ($cours->classe->eleves->hascote as $cote )
+                  @foreach ( $periodes as $periode )
+                    @foreach ( $epreuves as $epreuve )
+                      @if ($cote->periode_id == $periode->id && $cote->epreuve_id == $epreuve->id)
+                        <th>{{$periode->nom}} {{$epreuve->nom}}</th>
+                      @endif
+                    @endforeach
+                  @endforeach
+                @endforeach
               </tr>
             </thead>
             <tbody>
               @foreach ($cours->classe->eleves as $index => $eleve)
               <tr>
                 <td>{{$index+1}}</td>
-                <td>{{$eleve->personne->nom}}</td>
-                <td>{{$eleve->personne->postnom}}</td>
-                <td>{{$eleve->personne->prenom}}</td>
+                <td>{{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}</td>
                 <td>{{$eleve->personne->sexe}}</td>
               </tr>
               @endforeach
@@ -78,7 +83,7 @@
             </div>
             <div class="col-md-3">
                 <label for="comment" class="form-label">Commentaire</label>
-                <input type="text" name="comment" id="comment" class="form-control" >
+                <input type="text" name="commentaire" id="comment" class="form-control" >
             </div>
             <hr>
 

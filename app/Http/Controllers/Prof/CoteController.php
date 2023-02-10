@@ -36,14 +36,8 @@ class CoteController extends Controller
         $annee_scolaire = AnneeScolaire::where('active', true)->first();
         $classe = Classe::with('eleves')->findOrFail($cours->classe_id);
 
-        //return $classe->nom;
-
         foreach($classe->eleves as $eleve){
             if($request->has($eleve->id)){
-                echo 'eleve '. $eleve->id.' '.$eleve->name.' cote '. $request->get($eleve->id) .
-                    'Epreuve'. $request->get('epreuve'). ' Max '.$request->get('max'). ' Periode '.$request->get('periode').
-                    ' Commentaire '.$request->get('commentaire'). ' Cours '.$request->get('cours_id'). ' Annee Scolaire '.$annee_scolaire->id ;
-                
                 
                 Cote::create([
                     'eleve_id' => $eleve->id,
@@ -57,8 +51,7 @@ class CoteController extends Controller
                 ]);
             }
         }
-        //return $classes;
-        //return $cours;
-        //return redirect()->route('prof.cote.index');
+        
+        return redirect()->route('cours_prof.show', $request->get('cours_id'))->with('success', 'Cotes enregistrées avec succès');
     }
 }

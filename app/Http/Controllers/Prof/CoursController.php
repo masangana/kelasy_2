@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Prof;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Epreuve;
@@ -31,11 +32,14 @@ class CoursController extends Controller
         )->findOrFail(Auth::user()->id);
         /*fin script pour menu*/
 
+        $annee_scolaire = AnneeScolaire::where('active', true)->first();
         $cours = Cours::with(['classe' => function ($querry){
             $querry->with(['eleves' => function ($q){
-                $q->with('personne');
+                $q->with('personne', 'hasCote');
             }]);
         }])->findOrFail($id);
+
+        //return $cours;
 
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
@@ -45,7 +49,8 @@ class CoursController extends Controller
             'personne' => $personne,
             'cours' => $cours,
             'epreuves' => $epreuves,
-            'periodes' => $periodes
+            'periodes' => $periodes,
+            'annee_scolaire' => $annee_scolaire,
         ]);
     }
 }

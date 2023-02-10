@@ -19,4 +19,9 @@ class Cote extends Model
         'annee_scolaire_id',
         'commentaire',
     ];
+
+    public function eleve()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

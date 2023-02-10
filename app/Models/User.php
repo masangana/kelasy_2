@@ -83,4 +83,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Cursus::class, 'cursus_eleves');
     }
+
+    public function hasCote(){
+        return $this->hasMany(Cote::class, 'eleve_id');
+    }
 }
