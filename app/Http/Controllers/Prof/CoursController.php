@@ -40,6 +40,8 @@ class CoursController extends Controller
             }]);
         }])->findOrFail($id);
 
+        //return $cours;
+
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $annee_scolaire->id)->get();
 
         $epreuves = Epreuve::all();
@@ -82,6 +84,9 @@ class CoursController extends Controller
             ->where('cours_id', $id)
             ->where('annee_scolaire_id', $annee_scolaire->id)->count();
         
+        /*Fin compte manuel des activités dans une periode*/
+
+        /***  This Part MUST BE REVIEWED AND OPTIMISED  */
 
         return view('prof.cours.show', [
             'classes' => $classes,

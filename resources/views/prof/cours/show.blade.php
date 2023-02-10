@@ -95,9 +95,9 @@
           <table class="table datatable ">
             <thead>
               <tr>
-                <th rowspan="2" >#</th>
-                <th rowspan="2" >Nom </th>
-                <th rowspan="2" >Genre</th>
+                <th class="align-middle" rowspan="2" >#</th>
+                <th class="align-middle" rowspan="2" >Nom </th>
+                <th class="align-middle" rowspan="2" >Genre</th>
                 @foreach ($periodeTable as $index => $periode)
                   @foreach ($periodes as $periode2)
                     @if ($periode == $periode2->id)
@@ -115,7 +115,13 @@
                 @foreach ($periodeTable as $periode)
                   @foreach ($groupe_cote as $epreuve)
                     @if ($periode == $epreuve->periode_id)
-                      <th>TP</th>
+                      @foreach ($epreuves as $uneEpreuve )
+                        @if ($epreuve->epreuve_id == $uneEpreuve->id)
+                          <th class="text-center">{{$uneEpreuve->nom}} <br>
+                            <small>{{$epreuve->max}}</small>
+                          </th>
+                        @endif
+                      @endforeach
                     @endif
                   @endforeach
                 @endforeach
@@ -127,6 +133,17 @@
                 <td>{{$index+1}}</td>
                 <td>{{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}</td>
                 <td>{{$eleve->personne->sexe}}</td>
+                @foreach ($periodeTable as $periode)
+                  @foreach ($groupe_cote as $epreuve)
+                    @if ($periode == $epreuve->periode_id)
+                      @foreach ($eleve->hasCote as $cote)
+                        @if ($cote->eleve_id == $eleve->id && $cote->groupe_cote_id == $epreuve->id)
+                          <td class="text-center">{{$cote->cote}}</td>
+                        @endif
+                      @endforeach
+                    @endif
+                  @endforeach
+                @endforeach
               </tr>
               @endforeach
             </tbody>
