@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="overflow-scroll tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-          <table class="table datatable ">
+          <table class="table datatable table-striped table-bordered">
             <thead>
               <tr>
                 <th class="align-middle" rowspan="2" >#</th>

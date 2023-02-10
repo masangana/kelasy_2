@@ -56,8 +56,10 @@ class CoursController extends Controller
             }
         }
 
-        $periodeTable = array_unique($periodeTable);   
-        
+
+        /* Sort the array and remove doubled items */
+        asort($periodeTable);
+        $periodeTable = array_unique($periodeTable); 
         /*Compte manuel des activités dans une periode*/
 
         $compte1 = GroupeCote::where('periode_id', 1)
