@@ -46,7 +46,7 @@ class CoursController extends Controller
 
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
-
+        $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){
                 if($value->epreuve_id == $epreuve->id){
@@ -58,8 +58,11 @@ class CoursController extends Controller
 
 
         /* Sort the array and remove doubled items */
-        asort($periodeTable);
-        $periodeTable = array_unique($periodeTable); 
+        if( sizeof($periodeTable) > 0 ){
+            asort($periodeTable);
+            $periodeTable = array_unique($periodeTable);
+        }
+
         /*Compte manuel des activités dans une periode*/
 
         $compte1 = GroupeCote::where('periode_id', 1)

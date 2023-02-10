@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Prof;
 
 use App\Http\Controllers\Controller;
+use App\Models\Classe;
+use App\Models\Cours;
+use App\Models\Cours_profs;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClasseController extends Controller
 {
@@ -19,6 +24,39 @@ class ClasseController extends Controller
 
     public function show($id)
     {
-        return view('prof.classe.show');
+        /*script pour menu*/
+        $classes = Classe::with(['eleves' => function ($q){
+            $q->with('personne');
+        }])-> where('professeur_id', Auth::user()->id)->get();
+        $personne = User::with(['hasCours' => function ($querry)  {
+                $querry->with('classe');
+            }]
+        )->findOrFail(Auth::user()->id);
+        /*fin script pour menu*/
+
+        $classe = Classe::with(['eleves' => function ($q){
+            $q->with('personne');
+        }])->findOrFail($id);
+
+        /**Load Teachers for this class */
+
+        $cours = Cours::where('classe_id', $id)->with(
+            [
+                'professeurs' => function ($q){
+                    $q->with('personne');
+                }
+            ]
+        ) ->get();
+
+        return $cours;
+        //$professeurs = Cours_profs::where('')
+        
+        return view('prof.classe.show',
+            [
+                'classes' => $classes,
+                'personne' => $personne,
+                'classe' => $classe,
+            ]
+        );
     }
 }
