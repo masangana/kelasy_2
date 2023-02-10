@@ -48,7 +48,7 @@ class ClasseController extends Controller
             ]
         ) ->get();
 
-        return $cours;
+        //return $cours;
         //$professeurs = Cours_profs::where('')
         
         return view('prof.classe.show',
@@ -56,6 +56,7 @@ class ClasseController extends Controller
                 'classes' => $classes,
                 'personne' => $personne,
                 'classe' => $classe,
+                'cours' => $cours,
             ]
         );
     }
