@@ -7,6 +7,7 @@ use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Epreuve;
+use App\Models\GroupeCote;
 use App\Models\Periode;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,7 +40,9 @@ class CoursController extends Controller
             }]);
         }])->findOrFail($id);
 
-        //return $cours;
+        $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $annee_scolaire->id)->get();
+
+        //return $groupe_cote;
 
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
@@ -51,6 +54,7 @@ class CoursController extends Controller
             'epreuves' => $epreuves,
             'periodes' => $periodes,
             'annee_scolaire' => $annee_scolaire,
+            'groupe_cote' => $groupe_cote,
         ]);
     }
 }

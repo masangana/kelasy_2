@@ -18,6 +18,7 @@ class Cote extends Model
         'cote',
         'annee_scolaire_id',
         'commentaire',
+        'groupe_cote_id',
     ];
 
     public function eleve()

@@ -7,7 +7,9 @@ use App\Models\AnneeScolaire;
 use App\Models\Classe;
 use App\Models\Cote;
 use App\Models\Cours;
+use App\Models\GroupeCote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoteController extends Controller
 {
@@ -36,22 +38,33 @@ class CoteController extends Controller
         $annee_scolaire = AnneeScolaire::where('active', true)->first();
         $classe = Classe::with('eleves')->findOrFail($cours->classe_id);
 
-        foreach($classe->eleves as $eleve){
-            if($request->has($eleve->id)){
-                
-                Cote::create([
-                    'eleve_id' => $eleve->id,
-                    'cours_id' => $request->get('cours_id'),
-                    'epreuve_id' => $request->get('epreuve'),
-                    'max' => $request->get('max'),
-                    'periode_id' => $request->get('periode'),
-                    'cote' => $request->get($eleve->id),
-                    'annee_scolaire_id' => $annee_scolaire->id,
-                    'commentaire' => $request->get('commentaire'),
-                ]);
+        DB::transaction(function() use ($request, $cours, $annee_scolaire, $classe){
+            $groupe_cote = GroupeCote::create([
+                'cours_id' => $request->get('cours_id'),
+                'epreuve_id' => $request->get('epreuve'),
+                'periode_id' => $request->get('periode'),
+                'annee_scolaire_id' => $annee_scolaire->id,
+                'max' => $request->get('max'),
+                'commentaire' => $request->get('commentaire'),
+            ]);
+
+            foreach($classe->eleves as $eleve){
+                if($request->has($eleve->id)){
+                    
+                    Cote::create([
+                        'eleve_id' => $eleve->id,
+                        'cours_id' => $request->get('cours_id'),
+                        'epreuve_id' => $request->get('epreuve'),
+                        'max' => $request->get('max'),
+                        'periode_id' => $request->get('periode'),
+                        'groupe_cote_id' => $groupe_cote->id,
+                        'annee_scolaire_id' => $annee_scolaire->id,
+                        'cote' => $request->get($eleve->id),
+                    ]);
+                }
             }
-        }
-        
+        });
+              
         return redirect()->route('cours_prof.show', $request->get('cours_id'))->with('success', 'Cotes enregistrées avec succès');
     }
 }
