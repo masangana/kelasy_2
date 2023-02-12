@@ -28,11 +28,9 @@
             <li class="nav-item">
               <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
             </li>
-            @if (Auth::user()->role == 'groupe')
-              <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
-              </li>
-            @endif
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">E-Bulletin</button>
+            </li>
           </ul>
           <div class="tab-content pt-2">
             <div class="tab-pane fade show active profile-overview" id="profile-overview">
@@ -81,11 +79,71 @@
               </div>
              
             </div>
-          </div>
+
+            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                <h5 class="card-title">
+                    Fiche Personnelle de l'eleve
+                </h5>
+
+            </div>
         </div>
       </div>
     </div>
-
   </div>
+  
+  @foreach ($classes as $classe )
+    @foreach ($classe->cours as $cours )
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{$cours->nom}}</h5>
+
+                    <!-- Accordion without outline borders -->
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-heading{{$cours->id}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$cours->id}}" aria-expanded="false" aria-controls="flush-collapse{{$cours->id}}">
+                                Détails
+                            </button>
+                        </h2>
+                        <div id="flush-collapse{{$cours->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$cours->id}}" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="card-title">Moyen Max : <span class="badge border-primary border-1 text-primary">{{$cours->maximum}}</span></div>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-striped datatable">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Période</th>
+                                        <th scope="col">Epreuve</th>
+                                        <th scope="col">Cote</th>
+                                        <th scope="col">Max</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ( $eleve->hasCote as $index => $lesCotes )
+                                            @if ($lesCotes->cours_id == $cours->id)
+                                                <tr>
+                                                    <td>{{$lesCotes->periode->nom}}</td>
+                                                    <td>{{$lesCotes->epreuve->nom}}</td>
+                                                    <td>{{$lesCotes->cote}}</td>
+                                                    <td>{{$lesCotes->max}}</td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    </div><!-- End Accordion without outline borders -->
+                </div>
+            </div>
+        </div>
+    @endforeach
+  @endforeach
+    
 </section>
 @endsection
