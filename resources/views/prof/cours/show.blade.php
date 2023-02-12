@@ -163,8 +163,8 @@
                     <div class="row mb-3">
                       <label class="col-sm-2 col-form-label">Période</label>
                       <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example" name="periode_id">
-                          <option selected>Open this select menu</option>
+                        <select class="form-select" aria-label="Default select example" name="periode_id" required>
+                          <option value="" >Périodes</option>
                           @foreach ($periodes as $periode )
                             <option value="{{$periode->id}}">{{$periode->nom}}</option>
                           @endforeach

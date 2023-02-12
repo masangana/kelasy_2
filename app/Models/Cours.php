@@ -15,6 +15,8 @@ class Cours extends Model
         'description',
         'maximum',
         'classe_id',
+        'max_examen',
+        'max_periode',
     ];
     
     public function classe()
