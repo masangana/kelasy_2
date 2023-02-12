@@ -150,11 +150,20 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body">
-                  <form>
+
+                  @if($errors->any())
+                      {!! implode('', $errors->all('<div>:message</div>')) !!}
+                  @endif
+
+                  <form action="{{Route('cours.archive_periode')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="annee_scolaire_id" value="{{$annee_scolaire->id}}">
+                    <input type="hidden" name="classe_id" value="{{$cours->classe->id}}">
+                    <input type="hidden" name="cours_id" value="{{$cours->id}}">
                     <div class="row mb-3">
                       <label class="col-sm-2 col-form-label">Période</label>
                       <div class="col-sm-10">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" name="periode_id">
                           <option selected>Open this select menu</option>
                           @foreach ($periodes as $periode )
                             <option value="{{$periode->id}}">{{$periode->nom}}</option>

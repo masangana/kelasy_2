@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Prof;
 
 use App\Http\Controllers\Controller;
 use App\Models\AnneeScolaire;
+use App\Models\ArchiveCote;
 use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Epreuve;
@@ -40,8 +41,6 @@ class CoursController extends Controller
             }]);
         }])->findOrFail($id);
 
-        //return $cours;
-
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $annee_scolaire->id)->get();
 
         $epreuves = Epreuve::all();
@@ -55,28 +54,22 @@ class CoursController extends Controller
             }
         }
         
-        //return $periodes;
         $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){
                 if($value->epreuve_id == $epreuve->id){
                     $periodeTable[$index] = $value->periode_id;
-
                 }
             }
         }
-
         
-        $periode = Periode::with('archived')->first();
-
-        //return $periode;
         /* Sort the array and remove doubled items */
         if( sizeof($periodeTable) > 0 ){
             asort($periodeTable);
             $periodeTable = array_unique($periodeTable);
         }
 
-        /*Compte manuel des activités dans une periode*/
+        /*Compte manuel des activités dans une periode I'll make this code DRY in the next change*/
 
         $compte1 = GroupeCote::where('periode_id', 1)
             ->where('cours_id', $id)
@@ -122,5 +115,25 @@ class CoursController extends Controller
             'compte5' => $compte5,
             'compte6' => $compte6,
         ]);
+    }
+
+    public function archivePeriode(Request $request){
+        
+        $request->validate([
+            'cours_id' => 'required',
+            'classe_id' => 'required',
+            'periode_id' => 'required',
+            'annee_scolaire_id' => 'required',
+        ]);
+
+        ArchiveCote::create(
+            [
+                'cours_id' => $request->cours_id,
+                'classe_id' => $request->classe_id,
+                'periode_id' => $request->periode_id,
+                'annee_scolaire_id' => $request->annee_scolaire_id,
+            ]
+        );
+        return redirect()->back();
     }
 }

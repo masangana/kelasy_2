@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth', 'role:eleve']], function () {
 
 Route::group(['middleware' => ['auth', 'role:prof']], function () {
     Route::get('/prof_dashboard', [ProfDashboardController::class, 'index']);
+    Route::post('cours/archivePeriode', [CoursProfController::class, 'archivePeriode'])->name('cours.archive_periode');
     Route::resource('classe_prof', ClasseProfController::class);
     Route::resource('cours_prof', CoursProfController::class);
     Route::resource('cote_prof', CoteProfController::class);
