@@ -15,6 +15,9 @@
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Cote</button>
+        </li>       
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Administration</button>
         </li>
       </ul>
       <div class="tab-content pt-2" id="borderedTabContent">
@@ -130,6 +133,58 @@
             </div>
           </form>
         </div>
+        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Cette section va permettre de cloturer une période. Cela va mettre le calcule de la moyenne périodique. 
+            Tant qu'une période n'est pas cloturé, nous la moyenne ne sera pas calculée.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+            Quand vous cloturer une periode, aucune note ne peut plus etre ajouter ou changer!
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <h3 class="card-title"> Fiche Personnelle de l'eleve</h3>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <form>
+                    <div class="row mb-3">
+                      <label class="col-sm-2 col-form-label">Période</label>
+                      <div class="col-sm-10">
+                        <select class="form-select" aria-label="Default select example">
+                          <option selected>Open this select menu</option>
+                          @foreach ($periodes as $periode )
+                            <option value="{{$periode->id}}">{{$periode->nom}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label class="col-sm-2 col-form-label">Submit Button</label>
+                      <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                      </div>
+                    </div>    
+                  </form>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">  
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Default Solid Color</h5>
+
+                </div>
+              </div>   
+            </div>
+          </div>
+
+      </div>
       </div><!-- End Bordered Tabs -->
 
     </div>
