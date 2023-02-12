@@ -45,7 +45,17 @@ class CoursController extends Controller
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $annee_scolaire->id)->get();
 
         $epreuves = Epreuve::all();
-        $periodes = Periode::all();
+        $periodes = Periode::with('archived')->get();
+
+        foreach ($periodes as $key => $laPeriode) {
+            foreach($laPeriode->archived as $archived){
+                if($archived->cours_id == $id && $archived->annee_scolaire_id == $annee_scolaire->id){
+                    $periodes->forget($key);
+                }
+            }
+        }
+        
+        //return $periodes;
         $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){
@@ -56,7 +66,10 @@ class CoursController extends Controller
             }
         }
 
+        
+        $periode = Periode::with('archived')->first();
 
+        //return $periode;
         /* Sort the array and remove doubled items */
         if( sizeof($periodeTable) > 0 ){
             asort($periodeTable);

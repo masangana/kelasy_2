@@ -30,7 +30,7 @@ class Periode extends Model
     public function archived()
     {
         $annee = AnneeScolaire::where('active', 1)->first();
-        return $this->hasOne(ArchiveCote::class)
+        return $this->hasMany(ArchiveCote::class)
             ->where('annee_scolaire_id', $annee->id);
     }
 }
