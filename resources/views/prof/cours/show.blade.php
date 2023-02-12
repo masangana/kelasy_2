@@ -39,7 +39,7 @@
                 <th class="align-middle" rowspan="2" >Nom </th>
                 <th class="align-middle" rowspan="2" >Genre</th>
                 @foreach ($periodeTable as $index => $periode)
-                  @foreach ($periodes as $periode2)
+                  @foreach ($vue_periodes as $periode2)
                     @if ($periode == $periode2->id)
                       @php
                         $span = ${"compte" . $periode2->id};

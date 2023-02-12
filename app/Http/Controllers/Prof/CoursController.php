@@ -44,6 +44,7 @@ class CoursController extends Controller
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $annee_scolaire->id)->get();
 
         $epreuves = Epreuve::all();
+        $vue_periodes = Periode::all();
         $periodes = Periode::with('archived')->get();
 
         foreach ($periodes as $key => $laPeriode) {
@@ -53,7 +54,9 @@ class CoursController extends Controller
                 }
             }
         }
-        
+
+        //return [$periodes, $vue_periodes];
+
         $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){
@@ -108,6 +111,7 @@ class CoursController extends Controller
             'annee_scolaire' => $annee_scolaire,
             'groupe_cote' => $groupe_cote,
             'periodeTable' => $periodeTable,
+            'vue_periodes' => $vue_periodes,
             'compte1' => $compte1,
             'compte2' => $compte2,
             'compte3' => $compte3,
