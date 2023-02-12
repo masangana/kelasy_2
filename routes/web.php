@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\EleveController as EleveAdminController;
 use App\Http\Controllers\Prof\ClasseController as ClasseProfController;
 use App\Http\Controllers\Prof\CoursController as CoursProfController;
 use App\Http\Controllers\Prof\CoteController as CoteProfController;
+use App\Http\Controllers\Prof\EleveController as EleveProfController;
 use App\Http\Controllers\PersonneController;
 
 
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['auth', 'role:prof']], function () {
     Route::resource('classe_prof', ClasseProfController::class);
     Route::resource('cours_prof', CoursProfController::class);
     Route::resource('cote_prof', CoteProfController::class);
+    Route::resource('eleve', EleveProfController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {

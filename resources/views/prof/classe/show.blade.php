@@ -50,7 +50,11 @@
                     @foreach ($classe->eleves as $index => $eleve )
                     <tr>
                       <th scope="row">{{$index+1}}</th>
-                      <td>{{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}</td>
+                      <td>
+                        <a href="{{route('eleve.show', $eleve->id)}}">
+                          {{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}
+                        </a>
+                      </td>
                       <td>{{$eleve->personne->sexe}}</td>
                       <td>{{$eleve->personne->age()}}</td>
                     </tr>
