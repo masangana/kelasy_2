@@ -4,7 +4,6 @@
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{$cours->nom}} </h5>
-
       <!-- Bordered Tabs -->
       <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -29,23 +28,21 @@
                 {{$cours->description}}
             </p>
             <hr>
-
         </div>
         <div class="overflow-scroll tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
           <table class="table datatable table-striped table-bordered">
             <thead>
               <tr>
-                <th class="align-middle" rowspan="2" >#</th>
-                <th class="align-middle" rowspan="2" >Nom </th>
-                <th class="align-middle" rowspan="2" >Genre</th>
+                <th class="align-middle" rowspan="2">#</th>
+                <th class="align-middle" rowspan="2">Nom </th>
+                <th class="align-middle" rowspan="2">Genre</th>
                 @foreach ($periodeTable as $index => $periode)
                   @foreach ($vue_periodes as $periode2)
                     @if ($periode == $periode2->id)
                       @php
                         $span = ${"compte" . $periode2->id};
                       @endphp
-                      <th colspan="{{$span}}" class="text-center">{{$periode2->nom}}</th>
-                      
+                      <th colspan="{{$span}}" class="text-center">{{$periode2->nom}}</th>      
                     @endif
                   @endforeach
                 @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Prof;
 use App\Http\Controllers\Controller;
 use App\Models\AnneeScolaire;
 use App\Models\Classe;
+use App\Models\Classe_eleves;
 use App\Models\Epreuve;
 use App\Models\GroupeCote;
 use App\Models\Periode;
@@ -19,7 +20,11 @@ class EleveController extends Controller
         /*script pour menu*/
         $classes = Classe::with(['eleves' => function ($q){
             $q->with('personne');
-        }, 'cours'])-> where('professeur_id', Auth::user()->id)->get();
+        }, 'cours' => function ($qe){
+            $qe->with('archivedPeriode');
+        }])-> where('professeur_id', Auth::user()->id)->get();
+
+        //return $classes;
         $personne = User::with(['hasCours' => function ($querry)  {
               $querry->with('classe');
           }]
@@ -29,7 +34,9 @@ class EleveController extends Controller
         $eleve = User::with(['personne', 'hasCote' => function ($q){
             $q->with('epreuve', 'periode');
         }, 'isPupil'])->findOrFail($id);
+        //return $eleve;
         $anneeScolaire = AnneeScolaire::where('active', true)->first();
+        $classe_active = Classe_eleves::where([['user_id','=',$eleve->id], ['annee_scolaire_id','=',$anneeScolaire->id]]) ->first();
 
         /* Cette section gere les données qui permettent d'afficher l'entete du tableau */
         //return $eleve;
@@ -37,6 +44,8 @@ class EleveController extends Controller
 
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
+        $periodesArchived = Periode::with('archived')->get();
+        //return $periodesArchived;
         $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){
@@ -84,15 +93,12 @@ class EleveController extends Controller
 
         /***  This Part MUST BE REVIEWED AND OPTIMISED  */
 
-
-        //return $anneeScolaire;
-        //return $eleve;
-        //return $classes;
         return view('prof.eleve.show',[
             'classes' => $classes,
             'personne' => $personne,
             'eleve' => $eleve,
             'anneeScolaire' => $anneeScolaire,
+            'classe_active' => $classe_active,
             'groupe_cote' => $groupe_cote,
             'epreuves' => $epreuves,
             'periodes' => $periodes,
@@ -104,5 +110,10 @@ class EleveController extends Controller
             'compte5' => $compte5,
             'compte6' => $compte6,
         ]);
+    }
+
+    /**
+     */
+    public function __construct() {
     }
 }

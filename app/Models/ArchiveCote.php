@@ -21,5 +21,15 @@ class ArchiveCote extends Model
     {
         return $this->belongsTo(Periode::class);
     }
+
+    public function cours()
+    {
+        return $this->belongsTo(Cours::class);
+    }
+
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
+    }
     
 }
