@@ -596,17 +596,17 @@
                                               @endif
                                             @endforeach
                                             
-                                            @if ($sommeCote < ($sommeMax/2))
-                                              <tr class="table-danger">
+                                            @if (round($sommeCote) < ($sommeMax/2))
+                                              <tr class="table-danger" data-toggle="tooltip" data-placement="right" title="Moyenne arrondie à 0.5">
                                                 <th scope="row">{{$periode->nom}}</th>
                                                 <td>{{$sommeCote}} / {{$sommeMax}}</td>
-                                                <td> {{ ($sommeCote * $cours->max_periode)/ $sommeMax}} / {{$cours->max_periode}}</td>
+                                                <td> {{ round(($sommeCote * $cours->max_periode)/ $sommeMax)}} / {{$cours->max_periode}}</td>
                                               </tr>
                                             @else
                                               <tr class="table-success">
                                                 <th scope="row">{{$periode->nom}}</th>
                                                 <td>{{$sommeCote}} / {{$sommeMax}}</td>
-                                                <td> {{ ($sommeCote * $cours->max_periode)/ $sommeMax}} / {{$cours->max_periode}}</td>
+                                                <td> {{ round(($sommeCote * $cours->max_periode)/ $sommeMax)}} / {{$cours->max_periode}}</td>
                                               </tr>
                                             @endif
                                           @endif

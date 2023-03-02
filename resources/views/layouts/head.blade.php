@@ -32,6 +32,7 @@
     <script>
       $(function(){
        $("#prof").select2();
+       $('[data-toggle="tooltip"]').tooltip()
       }); 
     </script>
   
