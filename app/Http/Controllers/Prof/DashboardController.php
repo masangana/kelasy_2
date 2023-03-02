@@ -15,6 +15,7 @@ class DashboardController extends Controller {
     }
     public function index() {
       $classes = Classe::where('professeur_id', Auth::user()->id)->get();
+      //return $classes;
       $personne = User::with(['hasCours' => function ($querry)  {
             $querry->with('classe');
         }]

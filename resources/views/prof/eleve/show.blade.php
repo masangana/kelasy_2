@@ -169,33 +169,115 @@
                               <th scope="row" class="text-left">
                                 {{$cours->nom}}
                               </th>
+                              @php
+                                $p1 = "";
+                                $p2 = "";
+                                $p3 = "";
+                                $p4 = "";
+                                $exam1 = "";
+                                $exam2 = "";
+                                $table = [];
+                              @endphp
+                              @foreach ( $cours->archivedPeriode as $resultat )
+                                @foreach ($periodes as $periode )
+                                    @php
+                                      $sommeCote = 0;
+                                      $sommeMax = 0;
+                                    @endphp
+                                    @if ($resultat->periode_id == $periode->id)
+
+                                        @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                          @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
+                                            @php
+                                              $sommeCote += $lesCotes->cote;
+                                              $sommeMax += $lesCotes->max;
+                                            @endphp
+                                          @endif
+                                        @endforeach
+                                      
+                                        @if ($periode->nom == 'Première Période' )
+                                          @php
+                                            $p1 = round(($sommeCote * $cours->max_periode)/ $sommeMax);
+                                            $table[] = $sommeCote .' * '. $cours->max_periode. ' / '. $sommeMax;
+                                          @endphp
+                                        @endif
+                                      
+                                        @if ($periode->nom == 'Deuxième Période' )
+                                          @php
+                                            $p2 = round(($sommeCote * $cours->max_periode)/ $sommeMax);
+                                            $table[] = $sommeCote .' * '. $cours->max_periode. ' / '. $sommeMax;
+                                          @endphp
+                                        @endif
+
+                                        @if ($periode->nom == 'Troisième Periode' )
+                                          @php
+                                            $p3 = round(($sommeCote * $cours->max_periode)/ $sommeMax)
+                                          @endphp
+                                        @endif
+
+                                        @if ($periode->nom == 'Quatrième Periode' )
+                                          @php
+                                            $p4 = round(($sommeCote * $cours->max_periode)/ $sommeMax)
+                                          @endphp
+                                        @endif
+
+                                        @if ($periode->nom == 'Premier Semestre' )
+                                          @php
+                                            $exam1 = round(($sommeCote * $cours->max_periode)/ $sommeMax)
+                                          @endphp
+                                        @endif
+                                        
+                                        @if ($periode->nom == 'Deuxième Semestre' )
+                                          @php
+                                            $exam2 = round(($sommeCote * $cours->max_periode)/ $sommeMax)
+                                          @endphp
+                                        @endif
+                                    @endif
+                                    
+                                @endforeach
+                              @endforeach
                               <td>
-                                10
+                                {{$p1}}
                               </td>
                               <td>
-                                10
+                                {{$p2}}
                               </td>
                               <td>
-                                20
+                                {{$exam1}}
                               </td>
                               <td>
-                                40
+                                @if ($p1 == "" || $p2 == "" || $exam1 == "")
+                                  
+                                @else
+                                  {{$p1 + $p2 + $exam1}}
+                                @endif
+                                
                               </td>
                               <td>
-                                10
+                                {{$p3}}
                               </td>
                               <td>
-                                10
+                                {{$p4}}
                               </td>
                               <td>
-                                20
+                                {{$exam2}}
                               </td>
                               <td>
-                                40
+                                @if ($p3 == "" || $p4 == "" || $exam2 == "")
+                                  
+                                @else
+                                  {{$p3 + $p4 + $exam2}}
+                                @endif
                               </td>
                               <td>
-                                80
+                                @if ($p1 == "" || $p2 == "" || $exam1 == "" || $p3 == "" || $p4 == "" || $exam2 == "")
+                                  
+                                @else
+                                  {{$p1 + $p2 + $exam1 + $p3 + $p4 + $exam2}}
+                                @endif
+                                
                               </td>
+                          
                             </tr>
                           @endif
                         @endforeach
@@ -242,32 +324,37 @@
                               <th scope="row" class="text-left">
                                 {{$cours->nom}}
                               </th>
-                              <td>
-                                10
-                              </td>
-                              <td>
-                                10
-                              </td>
+                              @foreach ( $cours->archivedPeriode as $resultat )
+                                @foreach ($periodes as $periode )
+                                  @if ($periode->id == $resultat->periode_id)
+                                    @php
+                                      $sommeCote = 0;
+                                      $sommeMax = 0;
+                                    @endphp
+                                    @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                      @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
+                                        @php
+                                          $sommeCote += $lesCotes->cote;
+                                          $sommeMax += $lesCotes->max;
+                                        @endphp
+                                      @endif
+                                    @endforeach
+                                    
+                                    @if (round($sommeCote) < ($sommeMax/2))
+                                        <td> {{ round(($sommeCote * $cours->max_periode)/ $sommeMax)}} / {{$cours->max_periode}}</td>
+                                      
+                                    @else
+                                        <td> {{ round(($sommeCote * $cours->max_periode)/ $sommeMax)}} / {{$cours->max_periode}}</td>
+                                      
+                                    @endif
+                                  @endif
+                                @endforeach
+                              @endforeach
                               <td>
                                 20
                               </td>
                               <td>
-                                40
-                              </td>
-                              <td>
-                                10
-                              </td>
-                              <td>
-                                10
-                              </td>
-                              <td>
-                                20
-                              </td>
-                              <td>
-                                40
-                              </td>
-                              <td>
-                                80
+                                
                               </td>
                             </tr>
                           @endif
@@ -431,7 +518,6 @@
                             $maxiPer += $cours->max_periode;
                             $maxExam += $cours->max_examen;
                           @endphp
-                          {{$maxiPer}}
                         @endforeach
                         
                       @endif

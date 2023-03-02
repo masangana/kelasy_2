@@ -44,8 +44,6 @@ class EleveController extends Controller
 
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
-        $periodesArchived = Periode::with('archived')->get();
-        //return $periodesArchived;
         $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){

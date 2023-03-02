@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Classe;
+use App\Models\Cours;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $classes = Classe::with(['eleves' => function ($q){
+            $q->with('personne');
+        }, 'cours' => function ($qe){
+            $qe->with('archivedPeriode');
+        }])-> where('professeur_id', Auth::user()->id)->get();
+
+        $personne = User::with(['hasCours' => function ($querry)  {
+              $querry->with('classe');
+          }]
+        )->findOrFail(Auth::user()->id);
+        return view('home', [
+            'classes' => $classes,
+            'personne' => $personne,
+        ]);
     }
 }
