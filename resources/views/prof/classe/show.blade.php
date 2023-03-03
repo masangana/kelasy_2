@@ -93,8 +93,39 @@
 
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                   <p>
-
+                    Les résultats de la classe
                   </p>
+
+                  <table class="table datatable table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Eleve</th>
+                        <th scope="col">1re P</th>
+                        <th scope="col">2e P</th>
+                        <th scope="col">Examen</th>
+                        <th scope="col">Total Semestre</th>
+                        <th scope="col">3e P</th>
+                        <th scope="col">4e P</th>
+                        <th scope="col">Examen</th>
+                        <th scope="col">Total Semestre</th>
+                        <th scope="col">Total Année</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($classe->eleves as $index => $eleve )
+                      <tr>
+                        <td>
+                          <a href="{{route('eleve.show', $eleve->id)}}">
+                            {{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}
+                          </a>
+                        </td>
+                        <td>{{$eleve->personne->sexe}}</td>
+                        <td>{{$eleve->personne->age()}}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+
               </div>
 
               <div class="tab-pane fade pt-3" id="profile-settings">

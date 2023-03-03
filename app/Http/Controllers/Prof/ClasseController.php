@@ -35,8 +35,10 @@ class ClasseController extends Controller
         /*fin script pour menu*/
 
         $classe = Classe::with(['eleves' => function ($q){
-            $q->with('personne');
+            $q->with('personne', 'hasCoteByCursus');
         }])->findOrFail($id);
+
+        //return $classe;
 
         /**Load Teachers for this class */
 

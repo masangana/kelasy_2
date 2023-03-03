@@ -191,7 +191,7 @@
                                     @endphp
                                     @if ($resultat->periode_id == $periode->id)
 
-                                        @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                        @foreach ( $eleve->hasCoteByCursus as $index => $lesCotes)
                                           @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
                                             @php
                                               $sommeCote += $lesCotes->cote;
@@ -380,7 +380,7 @@
                                     @endphp
                                     @if ($resultat->periode_id == $periode->id)
 
-                                        @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                        @foreach ( $eleve->hasCoteByCursus as $index => $lesCotes)
                                           @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
                                             @php
                                               $sommeCote += $lesCotes->cote;
@@ -569,7 +569,7 @@
                                     @endphp
                                     @if ($resultat->periode_id == $periode->id)
 
-                                        @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                        @foreach ( $eleve->hasCoteByCursus as $index => $lesCotes)
                                           @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
                                             @php
                                               $sommeCote += $lesCotes->cote;
@@ -758,7 +758,7 @@
                                     @endphp
                                     @if ($resultat->periode_id == $periode->id)
 
-                                        @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                        @foreach ( $eleve->hasCoteByCursus as $index => $lesCotes)
                                           @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
                                             @php
                                               $sommeCote += $lesCotes->cote;
@@ -1112,7 +1112,7 @@
                                               $sommeCote = 0;
                                               $sommeMax = 0;
                                             @endphp
-                                            @foreach ( $eleve->hasCote as $index => $lesCotes)
+                                            @foreach ( $eleve->hasCoteByCursus as $index => $lesCotes)
                                               @if (($lesCotes->cours_id == $cours->id) && ($lesCotes->periode->id == $resultat->periode_id))
                                                 @php
                                                   $sommeCote += $lesCotes->cote;
@@ -1150,7 +1150,7 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                          @foreach ( $eleve->hasCote as $index => $lesCotes )
+                                          @foreach ( $eleve->hasCoteByCursus as $index => $lesCotes )
                                               @if ($lesCotes->cours_id == $cours->id)
                                                   <tr>
                                                       <td>{{$lesCotes->periode->nom}}</td>

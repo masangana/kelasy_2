@@ -31,7 +31,7 @@ class EleveController extends Controller
         )->findOrFail(Auth::user()->id);
         /*fin script pour menu*/
 
-        $eleve = User::with(['personne', 'hasCote' => function ($q){
+        $eleve = User::with(['personne', 'hasCoteByCursus' => function ($q){
             $q->with('epreuve', 'periode');
         }, 'isPupil'])->findOrFail($id);
         //return $eleve;
@@ -41,7 +41,7 @@ class EleveController extends Controller
         /* Cette section gere les données qui permettent d'afficher l'entete du tableau */
         //return $eleve;
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $anneeScolaire->id)->get();
-
+        //return $groupe_cote;
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
         $periodeTable = [];
