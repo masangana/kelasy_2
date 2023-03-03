@@ -793,13 +793,13 @@
 
                                         @if ($periode->nom == 'Premier Semestre' )
                                           @php
-                                            $exam1 = round(($sommeCote * $cours->max_periode)/ $sommeMax)
+                                            $exam1 = round(($sommeCote * $cours->max_examen)/ $sommeMax)
                                           @endphp
                                         @endif
                                         
                                         @if ($periode->nom == 'Deuxième Semestre' )
                                           @php
-                                            $exam2 = round(($sommeCote * $cours->max_periode)/ $sommeMax)
+                                            $exam2 = round(($sommeCote * $cours->max_examen)/ $sommeMax)
                                           @endphp
                                         @endif
                                     @endif
