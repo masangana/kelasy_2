@@ -32,6 +32,8 @@ class CoursController extends Controller
             'classe' => 'required',
             'maximum' => 'required',
             'description' => 'nullable',
+            'max_examen' => 'required',
+            'max_periode' => 'required',
         ]);
 
         $ecole = Ecole::firstOrFail();
@@ -43,6 +45,8 @@ class CoursController extends Controller
                 'description' => $request->get('description'),
                 'maximum' => $request->get('maximum'),
                 'classe_id' => $request->get('classe'),
+                'max_examen' => $request->get('max_examen'),
+                'max_periode' => $request->get('max_periode'),
             ]
         );
 

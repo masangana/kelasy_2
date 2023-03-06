@@ -58,10 +58,26 @@
                     </select>
                 </div>
                 <div class="col-12">
-                    <label for="inputPassword" class="form-label">Cote</label>
+                    <label for="inputPassword" class="form-label">Cote Annuelle</label>
                     <input type="number"
                             class="form-control"
                             name="maximum"
+                            min="0"
+                            required>
+                </div>
+                <div class="col-6">
+                    <label for="inputPassword" class="form-label">Code de la Période</label>
+                    <input type="number"
+                            class="form-control"
+                            name="max_periode"
+                            min="0"
+                            required>
+                </div>
+                <div class="col-6">
+                    <label for="inputPassword" class="form-label">Cote de l'Exame</label>
+                    <input type="number"
+                            class="form-control"
+                            name="max_examen"
                             min="0"
                             required>
                 </div>
@@ -99,9 +115,7 @@
                         @foreach ($cours as $cour)
                             <tr>
                                 <td>
-                                    <a href="{{Route('cours.show', $cour->id)}}">
-                                        {{$cour->nom}}
-                                    </a>
+                                    {{$cour->nom}}
                                 </td>
                                 <td>
                                     <a href="{{Route('classes.show', $cour->classe->id)}}">

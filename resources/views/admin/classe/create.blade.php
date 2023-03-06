@@ -52,11 +52,14 @@
                             name="prof"
                             id="prof"
                             required>
+                          <option selected value="">Choisir un prof</option>
                           @foreach ($profs as $prof)
-                            <option selected value="{{$prof->id}} ">
-                              {{$prof->name}} 
-                              
-                            </option>
+                            @if ($prof->personne)
+                              <option value="{{$prof->id}} ">
+                                {{$prof->name}} {{$prof->personne->postnom}}
+                              </option>
+                            @endif
+                            
                           @endforeach
                     </select>
                   </div>

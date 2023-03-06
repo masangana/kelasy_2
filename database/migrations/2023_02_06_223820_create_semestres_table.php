@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cours', function (Blueprint $table) {
+        Schema::create('semestres', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->string('slug');
-            $table->text('description')->nullable();
-            $table->integer('maximum')->unsigned();
-            $table->integer('max_periode')->unsigned();
-            $table->integer('max_examen')->unsigned();
-            $table->foreignId('classe_id')->constrained()->onDelete('cascade');
-            //$table->foreignId('professeur_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cours');
+        Schema::dropIfExists('semestres');
     }
 };

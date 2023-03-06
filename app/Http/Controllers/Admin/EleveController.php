@@ -20,13 +20,12 @@ class EleveController extends Controller
         
         $eleves = User::with('personne', 'isPupil')->where('role','eleve') ->get();
         $view = 'eleve';
-        //return $eleves[4]->isPupil[0];
+        //return $eleves;
         return view('admin.eleve.index',
             [
                 'personnes' => $eleves,
                 'view' => $view,
             ]);
-        //return view('admin.eleve.index');
     }
 
     public function create (){

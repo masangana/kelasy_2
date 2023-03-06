@@ -15,6 +15,8 @@ class Cours extends Model
         'description',
         'maximum',
         'classe_id',
+        'max_examen',
+        'max_periode',
     ];
     
     public function classe()
@@ -32,5 +34,12 @@ class Cours extends Model
         return $this->belongsToMany(User::class, 'cours_profs')
             ->withPivot('cours_id', 'user_id', 'annee_scolaire_id')
             ->withTimestamps();
+    }
+
+    public function archivedPeriode()
+    {
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->hasMany(ArchiveCote::class)
+            ->where('annee_scolaire_id', $annee->id);
     }
 }

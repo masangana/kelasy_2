@@ -20,6 +20,7 @@ class PersonneController extends Controller
     }
 
     public function create (){
+        
         return view('personne.create');
     }
 
@@ -55,6 +56,7 @@ class PersonneController extends Controller
                 'role_id' => $request->get('role'),
                 'ecole_id' => Auth::user()->ecole_id,
             ]);
+            //return $user;
             Personne::create([
                 'nom' => $request->get('nom'),
                 'postnom' => $request->get('postnom'),
@@ -69,6 +71,7 @@ class PersonneController extends Controller
                 'user_id' => $user->id,
                 'ecole_id' => Auth::user()->ecole_id,
             ]);
+
             $annee = AnneeScolaire::where('active', true)->firstOrFail();
             if ($user_role->nom == 'eleve') {
                 $user
@@ -77,10 +80,12 @@ class PersonneController extends Controller
             }
         });
 
-        if (Role::findOrfail($request->get('role')) == 'eleve') {
-            return redirect("/eleves/create")->with('success','Personne enregistrée!');
+
+
+        if ($request->get('role') == '2') {
+            return redirect("/eleves/create")->with('success','Eleve enregistré!');
         } else {
-           return redirect("/personnel/create")->with('success','Personne enregistrée!');
+           return redirect("/personnel/create")->with('success','Personnel enregistré!');
         }
         
        

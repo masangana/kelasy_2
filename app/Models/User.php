@@ -67,7 +67,9 @@ class User extends Authenticatable
 
     public function hasCours()
     {
-        return $this->belongsToMany(Cours::class, 'cours_profs');
+        return $this->belongsToMany(Cours::class, 'cours_profs')
+            ->withPivot('cours_id', 'user_id', 'annee_scolaire_id', 'is_active')
+            ->withTimestamps();
     }
 
     public function isPupil()
@@ -80,5 +82,15 @@ class User extends Authenticatable
     public function hasCursus()
     {
         return $this->belongsToMany(Cursus::class, 'cursus_eleves');
+    }
+
+    public function hasCote(){
+        return $this->hasMany(Cote::class, 'eleve_id');
+    }
+
+    public function hasCoteByCursus(){
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->hasMany(Cote::class, 'eleve_id')
+            ->where('annee_scolaire_id', $annee->id);
     }
 }

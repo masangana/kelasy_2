@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lesecoles', function (Blueprint $table) {
+        Schema::create('archive_cotes', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('slug')->nullable();
-            $table->text('description')->nullable();
-            $table->string('adresse');
-            $table->string('telephone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('logo')->nullable();
+            $table->foreignId('cours_id')->constrained('cours');
+            $table->foreignId('classe_id')->constrained('classes');
+            $table->foreignId('periode_id')->constrained('periodes');
+            $table->foreignId('annee_scolaire_id')->constrained('annee_scolaires');
+            $table->boolean('completed')->default(true);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ecoles');
+        Schema::dropIfExists('archive_cotes');
     }
 };
