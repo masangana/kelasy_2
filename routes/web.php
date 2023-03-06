@@ -16,6 +16,7 @@ use App\Http\Controllers\Prof\ClasseController as ClasseProfController;
 use App\Http\Controllers\Prof\CoursController as CoursProfController;
 use App\Http\Controllers\Prof\CoteController as CoteProfController;
 use App\Http\Controllers\Prof\EleveController as EleveProfController;
+use App\Http\Controllers\Eleve\ClasseController as ClasseEleveController;
 use App\Http\Controllers\PersonneController;
 
 
@@ -50,7 +51,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:eleve']], function () {
-    Route::get('/eleve_dashboard', [EleveDashboardController::class, 'index']);
+    Route::get('/eleve_dashboard', [EleveDashboardController::class, 'index'])->name('eleve.home');
+    Route::resource('classe', ClasseEleveController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:prof']], function () {

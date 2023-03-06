@@ -55,8 +55,6 @@ class CoursController extends Controller
             }
         }
 
-        //return [$periodes, $vue_periodes];
-
         $periodeTable = [];
         foreach ($groupe_cote as $index =>  $value) {
             foreach($epreuves as $epreuve){
