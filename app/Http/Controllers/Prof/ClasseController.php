@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Classe;
 use App\Models\Cours;
 use App\Models\Cours_profs;
+use App\Models\Periode;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,22 +44,21 @@ class ClasseController extends Controller
         /**Load Teachers for this class */
 
         $cours = Cours::where('classe_id', $id)->with(
-            [
-                'professeurs' => function ($q){
+            [ 'archivedPeriode', 'professeurs' => function ($q){
                     $q->with('personne');
                 }
             ]
         ) ->get();
 
-        //return $cours;
-        //$professeurs = Cours_profs::where('')
-        
+        $periodes = Periode::all();
+  
         return view('prof.classe.show',
             [
                 'classes' => $classes,
                 'personne' => $personne,
                 'classe' => $classe,
                 'cours' => $cours,
+                'periodes' => $periodes,
             ]
         );
     }
