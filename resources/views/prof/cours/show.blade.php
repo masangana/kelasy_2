@@ -29,62 +29,65 @@
             </p>
             <hr>
         </div>
-        <div class="overflow-scroll tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-          <table class="table datatable table-striped table-bordered">
-            <thead>
-              <tr>
-                <th class="align-middle" rowspan="2">#</th>
-                <th class="align-middle" rowspan="2">Nom </th>
-                <th class="align-middle" rowspan="2">Genre</th>
-                @foreach ($periodeTable as $index => $periode)
-                  @foreach ($vue_periodes as $periode2)
-                    @if ($periode == $periode2->id)
-                      @php
-                        $span = ${"compte" . $periode2->id};
-                      @endphp
-                      <th colspan="{{$span}}" class="text-center">{{$periode2->nom}}</th>      
-                    @endif
+        <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="table-responsive">
+            <table class="table datatable table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th class="align-middle" rowspan="2">#</th>
+                  <th class="align-middle" rowspan="2">Nom </th>
+                  <th class="align-middle" rowspan="2">Genre</th>
+                  @foreach ($periodeTable as $index => $periode)
+                    @foreach ($vue_periodes as $periode2)
+                      @if ($periode == $periode2->id)
+                        @php
+                          $span = ${"compte" . $periode2->id};
+                        @endphp
+                        <th colspan="{{$span}}" class="text-center">{{$periode2->nom}}</th>      
+                      @endif
+                    @endforeach
                   @endforeach
-                @endforeach
-                
-              </tr>
-              <tr>
-                @foreach ($periodeTable as $periode)
-                  @foreach ($groupe_cote as $epreuve)
-                    @if ($periode == $epreuve->periode_id)
-                      @foreach ($epreuves as $uneEpreuve )
-                        @if ($epreuve->epreuve_id == $uneEpreuve->id)
-                          <th class="text-center">{{$uneEpreuve->nom}} <br>
-                            <small>{{$epreuve->max}}</small>
-                          </th>
-                        @endif
-                      @endforeach
-                    @endif
+                  
+                </tr>
+                <tr>
+                  @foreach ($periodeTable as $periode)
+                    @foreach ($groupe_cote as $epreuve)
+                      @if ($periode == $epreuve->periode_id)
+                        @foreach ($epreuves as $uneEpreuve )
+                          @if ($epreuve->epreuve_id == $uneEpreuve->id)
+                            <th class="text-center">{{$uneEpreuve->nom}} <br>
+                              <small>{{$epreuve->max}}</small>
+                            </th>
+                          @endif
+                        @endforeach
+                      @endif
+                    @endforeach
                   @endforeach
-                @endforeach
-              <tr>
-            </thead>
-            <tbody>
-              @foreach ($cours->classe->eleves as $index => $eleve)
-              <tr>
-                <td>{{$index+1}}</td>
-                <td>{{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}</td>
-                <td>{{$eleve->personne->sexe}}</td>
-                @foreach ($periodeTable as $periode)
-                  @foreach ($groupe_cote as $epreuve)
-                    @if ($periode == $epreuve->periode_id)
-                      @foreach ($eleve->hasCote as $cote)
-                        @if ($cote->eleve_id == $eleve->id && $cote->groupe_cote_id == $epreuve->id)
-                          <td class="text-center">{{$cote->cote}}</td>
-                        @endif
-                      @endforeach
-                    @endif
+                <tr>
+              </thead>
+              <tbody>
+                @foreach ($cours->classe->eleves as $index => $eleve)
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}</td>
+                  <td>{{$eleve->personne->sexe}}</td>
+                  @foreach ($periodeTable as $periode)
+                    @foreach ($groupe_cote as $epreuve)
+                      @if ($periode == $epreuve->periode_id)
+                        @foreach ($eleve->hasCote as $cote)
+                          @if ($cote->eleve_id == $eleve->id && $cote->groupe_cote_id == $epreuve->id)
+                            <td class="text-center">{{$cote->cote}}</td>
+                          @endif
+                        @endforeach
+                      @endif
+                    @endforeach
                   @endforeach
+                </tr>
                 @endforeach
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
+          
         </div>
         <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
           <form action="{{Route('cote_prof.store')}}" class="row g-3" method="POST">
@@ -147,7 +150,7 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body">
-
+                  <h5 class="card-title">Cloturer    une Période</h5>
                   @if($errors->any())
                       {!! implode('', $errors->all('<div>:message</div>')) !!}
                   @endif
@@ -170,9 +173,9 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label">Submit Button</label>
+                      <label class="col-sm-2 col-form-label"></label>
                       <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                        <button type="submit" class="btn btn-primary">Valider</button>
                       </div>
                     </div>    
                   </form>
@@ -183,8 +186,28 @@
             <div class="col-lg-6">  
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Default Solid Color</h5>
-
+                  <h5 class="card-title">Périodes Cloturées</h5>
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Période</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ($cours->archivedPeriode as $archive)
+                          <tr>
+                            <td>{{$archive->periode->nom}}</td>
+                            <td>{{$archive->created_at->format('d-m-Y')}}</td>
+                            <td>
+                              
+                            </td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
                 </div>
               </div>   
             </div>
