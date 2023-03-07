@@ -21,16 +21,21 @@ class ClasseController extends Controller
             }]);
         }])->findOrFail($id);
 
+        $classeActive = Classe_eleves::with('classe')
+                    ->where('user_id', Auth::user()->id)->get();
+        
         $lesClasses = Classe_eleves::with('classe')
                     ->where('user_id', Auth::user()->id)->get();
         
         $eleve = User::with(['personne', 'hasCoteByCursus' => function ($q){
                         $q->with('epreuve', 'periode');
                     }, 'isPupil'])->findOrFail(Auth::user()->id);
+        
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
-        //return $eleve;
+        
         return view('eleve.classe.show', [
+            'maClasse' => $classe,
             'classe' => $classe,
             'eleve' => $eleve,
             'lesClasses' => $lesClasses,

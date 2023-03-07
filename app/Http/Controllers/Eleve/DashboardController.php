@@ -27,7 +27,7 @@ class DashboardController extends Controller {
       //return $lesClasses;
       return view('eleve.dashboard', [
         'classes' => $classes,
-        'classe' => $classe,
+        'maClasse' => $classe,
         'lesClasses' => $lesClasses,
       ]);
     }
