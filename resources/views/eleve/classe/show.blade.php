@@ -25,10 +25,13 @@
                                 <thead>
                                     <tr class="text-left">
                                         <th colspan="4">
-                                            NOMS ET PRENOMS
                                         </th>
                                         <th colspan="6" class="text-left">
-                                            Eleve : {{$eleve->personne->nom}} {{$eleve->personne->prenom}}
+                                            Eleve : {{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}}
+                                            <br>
+                                            Né(e) à : {{$eleve->personne->lieu_naissance}} le {{$eleve->personne->date_naissance->format('d/m/Y')}}
+                                            <br>
+                                            Classe : {{$classe->nom}}
                                         </th>
                                     </tr>
                                     <tr>
