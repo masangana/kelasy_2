@@ -150,7 +150,7 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Cloturer    une Période</h5>
+                  <h5 class="card-title">Cloturer une Période</h5>
                   @if($errors->any())
                       {!! implode('', $errors->all('<div>:message</div>')) !!}
                   @endif

@@ -72,6 +72,9 @@
                         <th scope="col">Genre</th>
                         <th scope="col">Cours</th>
                         <th scope="col">Téléphone</th>
+                        <th>
+                          Etapes Clôturées
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -83,6 +86,18 @@
                             <td>{{$professeur->personne->sexe}}</td>
                             <td>{{$unCours->nom}}</td>
                             <td>{{$professeur->personne->telephone}}</td>
+                            <td>
+                              @foreach ($unCours->archivedPeriode as $Achivedperiode )
+                                @foreach ($periodes as $periode )
+                                  @if ($periode->id == $Achivedperiode->periode_id)
+                                    @if ($Achivedperiode->completed == 1)
+                                      <span class="badge bg-success"> {{$periode->nom}} </span>
+                                    @else
+                                      <span class="badge bg-danger">{{$periode->nom}}</span>
+                                    @endif
+                                  @endif
+                                @endforeach
+                              @endforeach
                           </tr>
                         @endforeach
                       @endforeach

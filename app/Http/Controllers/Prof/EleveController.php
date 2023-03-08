@@ -24,7 +24,6 @@ class EleveController extends Controller
             $qe->with('archivedPeriode');
         }])-> where('professeur_id', Auth::user()->id)->get();
 
-        //return $classes;
         $personne = User::with(['hasCours' => function ($querry)  {
               $querry->with('classe');
           }]
@@ -39,9 +38,7 @@ class EleveController extends Controller
         $classe_active = Classe_eleves::where([['user_id','=',$eleve->id], ['annee_scolaire_id','=',$anneeScolaire->id]]) ->first();
 
         /* Cette section gere les données qui permettent d'afficher l'entete du tableau */
-        //return $eleve;
         $groupe_cote = GroupeCote::where('cours_id', $id)->where('annee_scolaire_id', $anneeScolaire->id)->get();
-        //return $groupe_cote;
         $epreuves = Epreuve::all();
         $periodes = Periode::all();
         $periodeTable = [];

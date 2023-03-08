@@ -69,6 +69,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Cours::class, 'cours_profs')
             ->withPivot('cours_id', 'user_id', 'annee_scolaire_id', 'is_active')
+            ->where('is_active', 1)
             ->withTimestamps();
     }
 
