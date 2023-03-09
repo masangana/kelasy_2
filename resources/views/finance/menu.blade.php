@@ -16,8 +16,8 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-                <a href="{{ route('ecole.show', ['ecole'=>1]) }}">
-                <i class="bi bi-circle"></i><span>Ecole</span>
+                <a href="{{ route('motif.index') }}">
+                <i class="bi bi-circle"></i><span>Motifs</span>
                 </a>
             </li>
         </ul>
