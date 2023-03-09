@@ -20,12 +20,14 @@ class Paiement extends Model
 
     public function eleve()
     {
-        return $this->belongsTo(User::class, 'eleve_id');
+        return $this->belongsTo(User::class, 'eleve_id')
+            ->with('personne', 'classeParAnnee');
     }
 
     public function personnel()
     {
-        return $this->belongsTo(User::class, 'personnel_id');
+        return $this->belongsTo(User::class, 'personnel_id')
+            ->with('personne');
     }
 
     public function motif()

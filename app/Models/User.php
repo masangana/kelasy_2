@@ -94,4 +94,12 @@ class User extends Authenticatable
         return $this->hasMany(Cote::class, 'eleve_id')
             ->where('annee_scolaire_id', $annee->id);
     }
+
+    public function classeParAnnee(){
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->belongsToMany(Classe::class, 'classe_eleves', 'user_id', 'classe_id')
+            ->withPivot('classe_id', 'user_id', 'annee_scolaire_id')
+            ->where('annee_scolaire_id', $annee->id)
+            ;
+    }
 }

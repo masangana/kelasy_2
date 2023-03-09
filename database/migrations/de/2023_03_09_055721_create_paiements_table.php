@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('montant')->unsigned();
             $table->foreignId('motif_id')->constrained('motifs');
             $table->foreignId('annee_scolaire_id')->constrained('annee_scolaires');
+            $table->text('description')->nullable();
+            $table->boolean('validate')->default(true);
             $table->timestamps();
         });
     }

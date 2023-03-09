@@ -38,16 +38,16 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Classes</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Paiements</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{{route('classes.create')}} ">
+            <a href="{{route('paiement.create')}} ">
               <i class="bi bi-circle"></i><span>Ajouter</span>
             </a>
           </li>
           <li>
-            <a href="{{route('classes.index')}} ">
+            <a href="{{route('paiement.index')}} ">
               <i class="bi bi-circle"></i><span>Voir</span>
             </a>
           </li>
