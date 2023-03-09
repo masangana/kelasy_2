@@ -13,7 +13,7 @@ class PersonnelController extends Controller
 {
     public function index (){
         $ecole = Ecole::firstOrFail();
-        $personnels = User::where('role', '=', 'admin')->orWhere('role', '=', 'prof')->with('personne') ->get();
+        $personnels = User::where('role', '!=', 'eleve')->with('personne') ->get();
         $view = 'personnel';
         //return $personnels;
         return view('admin.personnel.index',
@@ -26,7 +26,7 @@ class PersonnelController extends Controller
 
     public function create (){
         $ecole = Ecole::firstOrFail();
-        $roles = Role::where('nom','=' ,'prof')->orWhere('nom','=', 'admin')->get();
+        $roles = Role::where('nom','!=' ,'eleve')->get();
         $classes = [];
         //return $roles;
         
