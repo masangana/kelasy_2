@@ -23,17 +23,35 @@
                     </div>
                 @endif
               <!-- General Form Elements -->
-              <form method="POST" action="{{Route('motif.store')}} " class="row g-3">
+              <form method="POST" action="{{Route('minerval.store')}} " class="row g-3">
                   @csrf
                 <div class="col-12">
-                  <label for="inputText" class="form-label">Nom</label>
+                  <label for="inputText" class="form-label">Minerval Par An en $</label>
                     <input type="text"
                            class="form-control"
-                           name="nom"
-                           placeholder="Motif de Paiement"
+                           name="montant"
+                           placeholder="Montant Annuel"
                            required>
                 </div>
-
+                <div class="col-12">
+                    <label for="inputPassword" class="form-label">Classe</label>
+                    <select class="form-select"
+                            aria-label="Default select example"
+                            name="classe"
+                            id="prof"
+                            required>
+                        <option selected>Selectionner une classe</option>
+                        @foreach ($classes as $classe)
+                            @if ($classe->scolariteParAnnee == null)
+                                <option value="{{$classe->id}} ">
+                                    {{$classe->nom}}
+                                </option>
+                            @endif
+                            
+                        @endforeach
+                    </select>
+                </div>
+                
                 <div class="col-12">
                   <label for="inputPassword" class="form-label">Desciprion</label>
                   
@@ -53,37 +71,35 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Index des Motifs de Paiement</h5>
+                <h5 class="card-title">Index du Minerval</h5>
                 <table class="table table-striped datatable">
                     <thead>
                         <tr>
-                            <th>Nom</th>
+                            <th>Classe</th>
+                            <th>Montant</th>
                             <th>Description</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($motifs as $motif)
+                        @foreach ($scolarites as $minerval)
                             <tr>
-                                <td>{{$motif->nom}}</td>
-                                <td>{{$motif->description}}</td>
+                                <td>{{$minerval->classe->nom}}</td>
+                                <td>{{$minerval->montant}}</td>
+                                <td>{{$minerval->description}}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            @if ($motif->nom != "Scolarité")
-                                                <a href="{{Route('motif.edit', $motif->id)}} " class="dropdown-item">Modifier</a>
-                                                <form action="{{Route('motif.destroy', $motif->id)}} " method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="d-none">Supprimer</button>
-                                                </form>
-                                            @endif
+                                            <form action="{{Route('minerval.destroy', $minerval->id)}} " method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item">Supprimer</button>
+                                            </form>
                                         </div>
                                     </div>
-                                    
                                 </td>
                             </tr>
                         @endforeach

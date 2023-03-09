@@ -33,6 +33,6 @@ class MotifController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('motif.index');
+        return redirect()->route('motif.index')->with('success', 'Motif Créé');
     }
 }

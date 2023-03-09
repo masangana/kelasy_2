@@ -42,4 +42,16 @@ class Classe extends Model
     {
         return $this->hasMany(Cours::class, 'classe_id');
     }
+
+    public function scolariteParAnnee()
+    {
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->hasOne(Scolarite::class, 'classe_id')
+        ->where('annee_scolaire_id', $annee->id);
+    }
+
+    public function scolarites()
+    {
+        return $this->hasMany(Scolarite::class, 'classe_id');
+    }
 }
