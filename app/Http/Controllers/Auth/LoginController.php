@@ -33,6 +33,7 @@ class LoginController extends Controller
           case 'admin':
             return '/admin_dashboard';
             break;
+            
           case 'eleve':
             return '/eleve_dashboard';
             break; 
@@ -40,7 +41,15 @@ class LoginController extends Controller
           case 'prof':
             return '/prof_dashboard';
             break;
-      
+
+          case 'finance':
+            return '/finance_dashboard';
+            break;
+          
+          case 'parent':
+            return '/parent_dashboard';
+            break;
+          
           default:
             return '/home'; 
           break;

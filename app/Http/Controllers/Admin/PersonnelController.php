@@ -15,7 +15,6 @@ class PersonnelController extends Controller
         $ecole = Ecole::firstOrFail();
         $personnels = User::where('role', '!=', 'eleve')->with('personne') ->get();
         $view = 'personnel';
-        //return $personnels;
         return view('admin.personnel.index',
             [
                 'personnes' => $personnels,

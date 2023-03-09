@@ -33,7 +33,15 @@ class RedirectIfAuthenticated
             case 'prof':
                 return redirect('/prof_dashboard');
                 break;
-      
+                
+            case 'finance':
+                return redirect('/finance_dashboard');
+                break;
+
+            case 'parent':
+                return redirect('/parent_dashboard');
+                break;
+
             default:
                return redirect('/home'); 
                break;
