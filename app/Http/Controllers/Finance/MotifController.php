@@ -24,7 +24,7 @@ class MotifController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required',
+            'nom' => 'required|unique:motifs',
             'description' => 'required',
         ]);
 

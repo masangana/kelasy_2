@@ -57,7 +57,12 @@
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{route('rapport_finance.index')}} ">
-              <i class="bi bi-circle"></i><span>Voir</span>
+              <i class="bi bi-circle"></i><span>Général</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('classe_rapport.index')}} ">
+              <i class="bi bi-circle"></i><span>Classes</span>
             </a>
           </li>
         </ul>

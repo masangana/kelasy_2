@@ -109,4 +109,26 @@ class User extends Authenticatable
             ->where('annee_scolaire_id', $annee->id)
             ->with('motif');
     }
+
+    
+    public function fraisScolarite()
+    {
+        $annee = AnneeScolaire::where('active', 1)->first();
+        $motif = Motif::where('nom', 'Scolarité')->first();
+        return $this->hasMany(Paiement::class, 'eleve_id')
+            ->where('annee_scolaire_id', $annee->id)
+            ->where('motif_id', $motif->id)
+            ->with('motif');
+    }
+
+    public function AutresFrais()
+    {
+        $annee = AnneeScolaire::where('active', 1)->first();
+        $motif = Motif::where('nom', 'Scolarité')->first();
+        return $this->hasMany(Paiement::class, 'eleve_id')
+            ->where('annee_scolaire_id', $annee->id)
+            ->where('motif_id','!=', $motif->id)
+            ->with('motif');
+    }
+
 }

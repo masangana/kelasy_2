@@ -25,6 +25,7 @@ use App\Http\Controllers\Finance\MinervalController;//ce controller permet de cr
 use App\Http\Controllers\Finance\PaiementController as FinancePaiementController;
 use App\Http\Controllers\Finance\MotifController as FinanceMotifController;
 use App\Http\Controllers\Finance\RapportController as FinanceRapportController;
+use App\Http\Controllers\Finance\ClasseRapportController as FinanceClasseRapportController;
 use App\Http\Controllers\Parent\DashboardController as ParentDashboardController;
 
 
@@ -80,6 +81,7 @@ Route::group(['middleware' => ['auth', 'role:finance']], function () {
     Route::resource('paiement', FinancePaiementController::class);
     Route::resource('motif', FinanceMotifController::class);
     Route::resource('rapport_finance', FinanceRapportController::class);
+    Route::resource('classe_rapport', FinanceClasseRapportController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {

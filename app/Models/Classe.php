@@ -30,7 +30,9 @@ class Classe extends Model
 
     public function eleves()
     {
-        return $this->belongsToMany(User::class, 'classe_eleves');
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->belongsToMany(User::class, 'classe_eleves')
+        ->where('annee_scolaire_id', $annee->id);
     }
 
     public function tuteur()
@@ -51,7 +53,10 @@ class Classe extends Model
     }
 
     public function scolarites()
-    {
-        return $this->hasMany(Scolarite::class, 'classe_id');
+    {   
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->hasMany(Scolarite::class, 'classe_id')
+        ->where('annee_scolaire_id', $annee->id);
     }
+
 }

@@ -91,7 +91,7 @@
             <table class="table datatable table-striped table-bordered zero-configuration">
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>#</th>
                   <th>Eleve</th>
                   <th>Montant</th>
                   <th>Motif</th>
@@ -111,15 +111,6 @@
                   </tr>
                 @endforeach
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Id</th>
-                  <th>Eleve</th>
-                  <th>Montant</th>
-                  <th>Motif</th>
-                  <th>Date</th>
-                </tr>
-              </tfoot>
             </table>
 
         </div>
