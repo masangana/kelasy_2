@@ -24,6 +24,7 @@ use App\Http\Controllers\Finance\DashboardController as FinanceDashboardControll
 use App\Http\Controllers\Finance\MinervalController;//ce controller permet de creer le minerval
 use App\Http\Controllers\Finance\PaiementController as FinancePaiementController;
 use App\Http\Controllers\Finance\MotifController as FinanceMotifController;
+use App\Http\Controllers\Finance\RapportController as FinanceRapportController;
 use App\Http\Controllers\Parent\DashboardController as ParentDashboardController;
 
 
@@ -74,9 +75,11 @@ Route::group(['middleware' => ['auth', 'role:prof']], function () {
 
 Route::group(['middleware' => ['auth', 'role:finance']], function () {
     Route::get('/finance_dashboard', [FinanceDashboardController::class, 'index'])->name('finance.home');
+    Route::get('report', [FinanceRapportController::class, 'rapport'])->name('finance.rapport');
     Route::resource('minerval', MinervalController::class);
     Route::resource('paiement', FinancePaiementController::class);
     Route::resource('motif', FinanceMotifController::class);
+    Route::resource('rapport_finance', FinanceRapportController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {

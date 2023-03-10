@@ -41,7 +41,7 @@ class PaiementController extends Controller
         ]);
 
         $annee = AnneeScolaire::where('active', true)->first();
-        
+
         do
         {
             $numero = Str::random(10) ;
@@ -67,9 +67,6 @@ class PaiementController extends Controller
     public function show($id)
     {
         $eleve = User::with('personne', 'classeParAnnee', 'scolarite')-> where('role', 'eleve')->findOrFail($id);
-        //return $eleve;
-        $word = $this->numberToWord($id);
-        //return $word;
         return view('finance.paiement.show', [
             'eleve' => $eleve,
         ]);
