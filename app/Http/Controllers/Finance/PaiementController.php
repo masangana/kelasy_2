@@ -8,6 +8,7 @@ use App\Models\Motif;
 use App\Models\Paiement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PaiementController extends Controller
 {
@@ -40,6 +41,14 @@ class PaiementController extends Controller
         ]);
 
         $annee = AnneeScolaire::where('active', true)->first();
+        
+        do
+        {
+            $numero = Str::random(10) ;
+            $paieNum = Paiement::where('numero', $numero)->first();
+        }
+        while(!empty($paieNum));
+
         Paiement::create(
             [
                 'montant' => $request->montant,
@@ -48,9 +57,21 @@ class PaiementController extends Controller
                 'personnel_id' => auth()->user()->id,
                 'annee_scolaire_id' => $annee->id,
                 'description' => $request->description,
+                'numero' => $numero,
             ]
         );
 
         return redirect()->route('paiement.index')->with('success', 'Paiement effectué avec succès');
+    }
+
+    public function show($id)
+    {
+        $eleve = User::with('personne', 'classeParAnnee', 'scolarite')-> where('role', 'eleve')->findOrFail($id);
+        //return $eleve;
+        $word = $this->numberToWord($id);
+        //return $word;
+        return view('finance.paiement.show', [
+            'eleve' => $eleve,
+        ]);
     }
 }

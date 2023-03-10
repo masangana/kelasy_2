@@ -41,14 +41,10 @@
           <i class="bi bi-layout-text-window-reverse"></i><span>Paiements</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{route('paiement.create')}} ">
-              <i class="bi bi-circle"></i><span>Ajouter</span>
-            </a>
-          </li>
+          
           <li>
             <a href="{{route('paiement.index')}} ">
-              <i class="bi bi-circle"></i><span>Voir</span>
+              <i class="bi bi-circle"></i><span>Paiements</span>
             </a>
           </li>
         </ul>

@@ -99,7 +99,14 @@ class User extends Authenticatable
         $annee = AnneeScolaire::where('active', 1)->first();
         return $this->belongsToMany(Classe::class, 'classe_eleves', 'user_id', 'classe_id')
             ->withPivot('classe_id', 'user_id', 'annee_scolaire_id')
+            ->with('scolariteParAnnee')
+            ->where('annee_scolaire_id', $annee->id);
+    }
+
+    public function scolarite(){
+        $annee = AnneeScolaire::where('active', 1)->first();
+        return $this->hasMany(Paiement::class, 'eleve_id')
             ->where('annee_scolaire_id', $annee->id)
-            ;
+            ->with('motif');
     }
 }

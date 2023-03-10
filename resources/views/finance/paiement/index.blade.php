@@ -89,6 +89,7 @@
                             <th>Elève</th>
                             <th>Classe</th>
                             <th>Montant en ($) </th>
+                            <th>Numéro</th>
                             <th>Date</th>
                             <th>Motif</th>
                         </tr>
@@ -96,9 +97,14 @@
                     <tbody>
                         @foreach ($paiements as $paiement)
                             <tr>
-                                <td>{{$paiement->eleve->personne->nom}} {{$paiement->eleve->personne->postnom}} {{$paiement->eleve->personne->prenom}}</td>
+                                <td>
+                                    <a href="{{route('paiement.show',$paiement->eleve->id )}}">
+                                        {{$paiement->eleve->personne->nom}} {{$paiement->eleve->personne->postnom}} {{$paiement->eleve->personne->prenom}}
+                                    </a>
+                                </td>
                                 <td>{{$paiement->eleve->classeParAnnee[0]->nom}}</td>
                                 <td>{{$paiement->montant}}</td>
+                                <td>{{$paiement->numero}}</td>
                                 <td>{{$paiement->created_at->format('d-m-Y')}}</td>
                                 <td>{{$paiement->motif->nom}}</td>
                             </tr>

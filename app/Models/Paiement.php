@@ -16,6 +16,7 @@ class Paiement extends Model
         'montant',
         'annee_scolaire_id',
         'description',
+        'numero',
     ];
 
     public function eleve()
