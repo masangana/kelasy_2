@@ -11,7 +11,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{Route('paiement_eleve.index')}} ">
           <i class="bi bi-cash-coin"></i><span>Finance</span>
         </a>
       </li><!-- End Forms Nav -->
