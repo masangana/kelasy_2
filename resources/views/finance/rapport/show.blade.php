@@ -19,7 +19,6 @@
                   @foreach ($motifs as $motif )
                       <th>{{$motif->nom}}</th>
                   @endforeach
-                  
                 </tr>
               </thead>
               <tbody>
@@ -45,16 +44,12 @@
                                     @endforeach
                                 @endif
                             @endforeach
-                            
-                            
                         </tr>
                     @endforeach
               </tbody>
             </table>
-
         </div>
       </div>
-
     </div>
   </div>
 @endsection
