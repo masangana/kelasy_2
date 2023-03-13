@@ -76,7 +76,7 @@ class User extends Authenticatable
     public function isPupil()
     {
         return $this->belongsToMany(Classe::class, 'classe_eleves', 'user_id', 'classe_id')
-            ->withPivot('classe_id', 'user_id', 'annee_scolaire_id')
+            ->withPivot('id','classe_id', 'user_id', 'annee_scolaire_id')
             ->withTimestamps();
     }
 
@@ -134,7 +134,7 @@ class User extends Authenticatable
     public function aDesEnfants(){
         return $this->hasMany(EleveParent::class, 'parent_id')
             ->with(['eleve' => function ($querry)  {
-                $querry->with('personne', 'classeParAnnee');
+                $querry->with('personne', 'classeParAnnee', 'isPupil');
             }]);
     }
     public function aDesParents(){

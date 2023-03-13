@@ -29,6 +29,7 @@ use App\Http\Controllers\Finance\MotifController as FinanceMotifController;
 use App\Http\Controllers\Finance\RapportController as FinanceRapportController;
 use App\Http\Controllers\Finance\ClasseRapportController as FinanceClasseRapportController;
 use App\Http\Controllers\Parent\DashboardController as ParentDashboardController;
+use App\Http\Controllers\Parent\EnfantController as ParentEnfantController;
 use App\Http\Controllers\PDFController;
 
 
@@ -87,6 +88,11 @@ Route::group(['middleware' => ['auth', 'role:finance']], function () {
     Route::resource('motif', FinanceMotifController::class);
     Route::resource('rapport_finance', FinanceRapportController::class);
     Route::resource('classe_rapport', FinanceClasseRapportController::class);
+});
+
+Route::group(['middleware' => ['auth', 'role:parent']], function () {
+    Route::get('/parent_dashboard', [ParentDashboardController::class, 'index'])->name('parent.home');
+    Route::resource('enfant', ParentEnfantController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {

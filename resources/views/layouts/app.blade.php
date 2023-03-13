@@ -18,6 +18,8 @@
     @include('admin.menu')
   @elseif (Auth::user()->role == 'finance')
     @include('finance.menu')
+  @elseif (Auth::user()->role == 'parent')
+    @include('parent.menu')
   @endif
 
   <!-- End Sidebar-->

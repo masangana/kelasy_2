@@ -22,11 +22,12 @@ class Classe_eleves extends Model
 
     public function eleve()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id')
+            ->with('personne');
     }
 
-    public function annee_scolaire()
+    public function anneeScolaire()
     {
-        return $this->belongsTo(Annee_scolaire::class, 'annee_scolaire_id');
+        return $this->belongsTo(AnneeScolaire::class, 'annee_scolaire_id');
     }
 }
