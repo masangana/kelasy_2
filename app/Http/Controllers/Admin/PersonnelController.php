@@ -25,9 +25,8 @@ class PersonnelController extends Controller
 
     public function create (){
         $ecole = Ecole::firstOrFail();
-        $roles = Role::where('nom','!=' ,'eleve')->get();
+        $roles = Role::where('nom','!=' ,'parent')->where('nom','!=' ,'eleve')->get();
         $classes = [];
-        //return $roles;
         
         return view('admin.personnel.create', [
             'ecole' => $ecole,

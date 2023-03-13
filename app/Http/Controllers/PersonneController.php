@@ -37,8 +37,6 @@ class PersonneController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
 
-        //return $request->all();
-
         DB::transaction(function() use ($request)
         {
             $file = $request->photo;
@@ -56,7 +54,7 @@ class PersonneController extends Controller
                 'role_id' => $request->get('role'),
                 'ecole_id' => Auth::user()->ecole_id,
             ]);
-            //return $user;
+            
             Personne::create([
                 'nom' => $request->get('nom'),
                 'postnom' => $request->get('postnom'),
@@ -80,12 +78,14 @@ class PersonneController extends Controller
             }
         });
 
-
-
-        if ($request->get('role') == '2') {
+        $user_role = Role::findOrfail($request->get('role'));
+        
+        if ($user_role->nom == 'eleve') {
             return redirect("/eleves/create")->with('success','Eleve enregistré!');
-        } else {
-           return redirect("/personnel/create")->with('success','Personnel enregistré!');
+        } elseif($user_role->nom == 'parent') {
+           return redirect("/parents/create")->with('success','Parent enregistré!');
+        }else{
+            return redirect("/personnel/create")->with('success','Personnel enregistré!');
         }
         
        

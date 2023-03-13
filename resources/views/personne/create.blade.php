@@ -42,7 +42,7 @@
         </div>
         <div class="col-6">
           <label class="form-label">Role</label>
-          <select class="form-select"
+          <select class="form-select text-capitalize"
                   aria-label="Default select example"
                   name="role">
             <option selected>Select</option>

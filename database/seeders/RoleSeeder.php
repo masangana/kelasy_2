@@ -38,7 +38,7 @@ class RoleSeeder extends Seeder
 
         Role::create(
             [
-                'nom' => 'Parent',
+                'nom' => 'parent',
                 'description' => 'Parent',
             ]
         );
