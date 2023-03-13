@@ -44,7 +44,7 @@ class ClasseRapportController extends Controller
         }])-> findOrFail($classe);
 
         $motifs = Motif::where('nom', '!=', 'scolarité')->get() ;
-        //return $classe;
+        
         return view('finance.rapport.show', [
             'classe' => $classe,
             'motifs' => $motifs,
