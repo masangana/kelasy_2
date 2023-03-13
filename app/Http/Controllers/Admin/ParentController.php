@@ -5,14 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Ecole;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ParentController extends Controller
 {
     public function index()
     {
-        
-        return view('admin.parent.index');
+        $ecole = Ecole::firstOrFail();
+        $personnels = User::where('role', 'parent')->with('personne') ->get();
+        $view = 'Parents';
+        return view('admin.parent.index', [
+            'personnes' => $personnels,
+            'ecole' => $ecole,
+            'view' => $view,
+        ]);
     }
 
     public function create()
@@ -27,13 +34,8 @@ class ParentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request){
+        return $request->all();
+    } 
 
-    public function show($id)
-    {
-        //
-    }
 }

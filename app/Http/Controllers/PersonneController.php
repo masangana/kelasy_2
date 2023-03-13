@@ -107,13 +107,13 @@ class PersonneController extends Controller
             }
         }
 
-        //return $anne_table;
+        $eleves = User::where('role', 'eleve')->with('personne')->get();
 
-        //return $personne;
         return view('personne.show', [
             'personne' => $personne,
             'ecole' => $ecole,
             'annees' => $annee_table,
+            'eleves' => $eleves,
         ]);
     }
 }

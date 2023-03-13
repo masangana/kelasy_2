@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{{route('admin.home')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard Admin</span>
         </a>
@@ -104,10 +104,10 @@
       </li><!-- End Icons Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav2" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Parents</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="icons-nav2" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="{{route('parents.create')}}">
               <i class="bi bi-circle"></i><span>Ajouter</span>

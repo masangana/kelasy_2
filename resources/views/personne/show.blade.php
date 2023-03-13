@@ -28,7 +28,7 @@
             <li class="nav-item">
               <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
             </li>
-            @if (Auth::user()->role == 'groupe')
+            @if (Auth::user()->role == 'admin' && $personne->user->role == 'parent')
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
               </li>
@@ -80,6 +80,36 @@
                 
               </div>
              
+            </div>
+
+            <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+              <form method="POST" action="{{Route('parents.store')}}">
+                @csrf
+                
+                <input type="hidden" name="parent" value="{{$personne->user->id}}">
+                <div class="row mb-3">
+                    <label for="inputPassword" class="col-md-4 col-lg-3 col-form-label">Elève</label>
+                    <div class="col-md-8 col-lg-9">
+                        <select class="form-select"
+                            aria-label="Default select example"
+                            name="eleve"
+                            id="eleve"
+                            required>
+                            <option selected>Choisir un Elève2</option>
+                            @foreach ($eleves as $eleve )
+                                <option value="{{$eleve->id}}">{{$eleve->personne->nom}} {{$eleve->personne->postnom}} {{$eleve->personne->prenom}} | 
+                                    {{$eleve->classeParAnnee[0]->nom}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </div>
+
+              </form>
             </div>
           </div>
         </div>

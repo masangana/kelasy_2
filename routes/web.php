@@ -52,7 +52,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/admin_dashboard', [AdminDashboardController::class, 'index']);
+    Route::get('/admin_dashboard', [AdminDashboardController::class, 'index'])->name('admin.home');
     Route::resource('admin/ecole', EcoleController::class);
     Route::resource('personnel', PersonnelAdminController::class);
     Route::resource('classes', ClasseAdminController::class);
