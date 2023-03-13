@@ -15,36 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        
-       /* Role::factory(1)->create(
-            [
-                'nom' => 'admin',
-                'description' => 'Administrateur',
-            ]
-        );
-        
-        Role::factory(1)->create(
-            [
-                'nom' => 'eleve',
-                'description' => 'eleve',
-            ]
-        );
-
-        Role::factory(1)->create(
-            [
-                'nom' => 'enseignant',
-                'description' => 'enseignant',
-            ]
-        );
-
-        \App\Models\User::factory(10)->create();
-        */
-        \App\Models\Personne::factory(10)->create();
+        $this->call([
+            PeriodeSeeder::class,
+            EpreuveSeeder::class,
+        ]);
     }
 }
