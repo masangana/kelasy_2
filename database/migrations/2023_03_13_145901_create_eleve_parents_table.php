@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('eleve_parents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('eleve_id')->constrained('users');
+            $table->foreignId('parent_id')->constrained('users');
             $table->timestamps();
         });
     }

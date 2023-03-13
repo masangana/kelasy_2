@@ -95,7 +95,7 @@ class PersonneController extends Controller
 
         $ecole = Ecole::firstOrFail();
         $personne->load(['user'=> function ($request){
-            $request->with('isPupil');
+            $request->with('isPupil','aDesEnfants');
         }]);
 
         $annee_table = [];
@@ -108,7 +108,7 @@ class PersonneController extends Controller
         }
 
         $eleves = User::where('role', 'eleve')->with('personne')->get();
-
+        //return $personne->user->aDesEnfants[0]->eleve->classeParAnnee[0] ->nom;
         return view('personne.show', [
             'personne' => $personne,
             'ecole' => $ecole,

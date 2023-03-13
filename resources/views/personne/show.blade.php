@@ -110,6 +110,35 @@
                 </div>
 
               </form>
+
+              <br>
+
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Eleve</th>
+                      <th scope="col">Classe</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($personne->user->aDesEnfants as $enfant )
+                      <tr>
+                        <td>{{$enfant->eleve->personne->nom}} {{$enfant->eleve->personne->postnom}} {{$enfant->eleve->personne->prenom}}</td>
+                        <td>{{$enfant->eleve->classeParAnnee[0]->nom}}</td>
+                        <td>
+                          <form action="{{Route('parents.destroy', $enfant->eleve->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                          </form>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

@@ -131,4 +131,17 @@ class User extends Authenticatable
             ->with('motif');
     }
 
+    public function aDesEnfants(){
+        return $this->hasMany(EleveParent::class, 'parent_id')
+            ->with(['eleve' => function ($querry)  {
+                $querry->with('personne', 'classeParAnnee');
+            }]);
+    }
+    public function aDesParents(){
+        return $this->hasOne(EleveParent::class,'eleve_id')
+            ->with(['parent' => function ($querry)  {
+                $querry->with('personne');
+            }]);
+    }
+
 }
