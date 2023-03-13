@@ -18,8 +18,17 @@ use App\Http\Controllers\Prof\CoteController as CoteProfController;
 use App\Http\Controllers\Prof\EleveController as EleveProfController;
 use App\Http\Controllers\Eleve\ClasseController as ClasseEleveController;
 use App\Http\Controllers\Eleve\ProfileController as EleveProfileController;
+use App\Http\Controllers\Eleve\PaiementController as ElevePaiementController;
 use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Finance\DashboardController as FinanceDashboardController;
+use App\Http\Controllers\Finance\MinervalController;//ce controller permet de creer le minerval
+use App\Http\Controllers\Finance\PaiementController as FinancePaiementController;
+use App\Http\Controllers\Finance\MotifController as FinanceMotifController;
+use App\Http\Controllers\Finance\RapportController as FinanceRapportController;
+use App\Http\Controllers\Finance\ClasseRapportController as FinanceClasseRapportController;
+use App\Http\Controllers\Parent\DashboardController as ParentDashboardController;
+use App\Http\Controllers\PDFController;
 
 
 /*
@@ -56,6 +65,7 @@ Route::group(['middleware' => ['auth', 'role:eleve']], function () {
     Route::get('/eleve_dashboard', [EleveDashboardController::class, 'index'])->name('eleve.home');
     Route::resource('classe', ClasseEleveController::class);
     Route::resource('profile', EleveProfileController::class);
+    Route::resource('paiement_eleve', ElevePaiementController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:prof']], function () {
@@ -67,7 +77,18 @@ Route::group(['middleware' => ['auth', 'role:prof']], function () {
     Route::resource('eleve', EleveProfController::class);
 });
 
+Route::group(['middleware' => ['auth', 'role:finance']], function () {
+    Route::get('/finance_dashboard', [FinanceDashboardController::class, 'index'])->name('finance.home');
+    Route::get('report', [FinanceRapportController::class, 'rapport'])->name('finance.rapport');
+    Route::resource('minerval', MinervalController::class);
+    Route::resource('paiement', FinancePaiementController::class);
+    Route::resource('motif', FinanceMotifController::class);
+    Route::resource('rapport_finance', FinanceRapportController::class);
+    Route::resource('classe_rapport', FinanceClasseRapportController::class);
+});
+
 Route::group(['middleware' => ['auth']], function () {
     //Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('personne', PersonneController::class);
+    Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 });

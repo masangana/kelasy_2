@@ -16,6 +16,8 @@
     @include('eleve.menu')
   @elseif (Auth::user()->role == 'admin')
     @include('admin.menu')
+  @elseif (Auth::user()->role == 'finance')
+    @include('finance.menu')
   @endif
 
   <!-- End Sidebar-->
